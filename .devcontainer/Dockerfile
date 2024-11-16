@@ -6,16 +6,6 @@ RUN set -x \
 
 USER vscode
 
-# install dependencies
-RUN sudo apt-get update && sudo apt-get install -y \
-    nodejs npm \
- && sudo apt-get clean \
- && sudo rm -rf /var/lib/apt/lists/*
-
-# install npm packages
-RUN sudo npm install -g \
-    gh-pages
-
 # install bun
 RUN sudo curl https://bun.sh/install | bash \
     && bash -c "source /home/vscode/.bashrc"
