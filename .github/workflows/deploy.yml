@@ -8,12 +8,27 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
+      # リポジトリをクローン
       - uses: actions/checkout@v3
+
+      # Bunをインストール
       - name: Install Bun
-        run: curl -fsSL https://bun.sh/install | bash
+        run: |
+          curl -fsSL https://bun.sh/install | bash
+          export BUN_INSTALL="$HOME/.bun"
+          export PATH="$BUN_INSTALL/bin:$PATH"
+          bun --version
+
+      # プロジェクトをビルド
       - name: Build project
-        run: bun build
+        run: |
+          export BUN_INSTALL="$HOME/.bun"
+          export PATH="$BUN_INSTALL/bin:$PATH"
+          bun build
+
+      # GitHub Pages にデプロイ
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
