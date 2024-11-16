@@ -1,34 +1,84 @@
+/** @jsxImportSource @emotion/react */
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { css } from '@emotion/react'
+import { Process001 } from './process001'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tImage, setImage] = useState<HTMLImageElement | null>(null)
+  const [tResultURL, setResultURL] = useState<string | null>(null)
+
+  // ファイルを選択して画像を読み込む
+  const handleFileChange = (aEvent: React.ChangeEvent<HTMLInputElement>) => {
+    const tFile = aEvent.target.files?.[0]
+    if (!tFile) return
+    const tImage = new Image()
+    tImage.src = URL.createObjectURL(tFile)
+    tImage.onload = () => { setImage(tImage) }
+  }
+
+  // ファイルをドロップして画像を読み込む
+  const handleDrop = (aEvent: React.DragEvent<HTMLDivElement>) => {
+    aEvent.preventDefault()
+    const tFile = aEvent.dataTransfer.files?.[0]
+    if (!tFile) return
+    const tImage = new Image()
+    tImage.src = URL.createObjectURL(tFile)
+    tImage.onload = () => { setImage(tImage) }
+  }
+
+
+
+  const tBorderLineCSS = css({
+    border: '1px solid black',
+  })
+
+  const tImageViewCSS = css({
+    width: 512,
+    height: 512,
+    // 画像が大きい場合に縮小表示
+    img: {
+      maxWidth: '100%',
+      maxHeight: '100%',
+    },
+  })
+
+  const tVerticalCSS = css({
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 16,
+  })
+
+  const tHorizontalCSS = css({
+    display: 'flex',
+    gap: 16,
+  })
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div>
+      <h1>Image Process TS</h1>
+      <div css={css(tHorizontalCSS)} >
+
+        <aside css={css(tBorderLineCSS, { padding: 3 })} >
+          <Process001 tImage={tImage} setResultURL={setResultURL} />
+        </aside>
+
+        <main css={css(tVerticalCSS)} >
+          <input type="file" onChange={handleFileChange} />
+          <div css={css(tHorizontalCSS)} >
+            <div css={css(tImageViewCSS, tBorderLineCSS)}
+              onDrop={handleDrop}
+              onDragOver={(aEvent) => aEvent.preventDefault()} // ドロップを許可
+            >
+              {tImage && <img src={tImage.src} alt="Original" />}
+            </div>
+            <div css={css(tImageViewCSS, tBorderLineCSS)} >
+              {tResultURL && <img src={tResultURL} alt="Result" />}
+            </div>
+          </div>
+        </main>
+
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div >
   )
 }
 
