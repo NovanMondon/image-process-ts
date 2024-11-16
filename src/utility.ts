@@ -4,7 +4,7 @@ export type ProcessedImage = {
     data: number[][][]
 }
 
-interface ImageProcessUtilityProps {
+export interface ImageProcessUtilityProps {
     tImage: HTMLImageElement | null
     setResultURL: (aURL: string) => void
 }

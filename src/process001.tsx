@@ -1,11 +1,6 @@
-import { ImageProcessUtility, ProcessedImage } from "./utility"
+import { ImageProcessUtility, ImageProcessUtilityProps, ProcessedImage } from "./utility"
 
-interface Process001Props {
-    tImage: HTMLImageElement | null
-    setResultURL: (aURL: string) => void
-}
-
-export function Process001({ tImage, setResultURL }: Process001Props) {
+export function Process001({ tImage, setResultURL }: ImageProcessUtilityProps) {
     // RGBをBGRに変換
     const rgb2bgr = ImageProcessUtility({ tImage, setResultURL }, (aImage: ProcessedImage) => {
         for (let x = 0; x < aImage.width; x++) {

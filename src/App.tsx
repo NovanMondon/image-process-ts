@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { css } from '@emotion/react'
 import { Process001 } from './process001'
+import { Process002 } from './process002'
 
 function App() {
   const [tImage, setImage] = useState<HTMLImageElement | null>(null)
@@ -45,12 +46,12 @@ function App() {
   const tVerticalCSS = css({
     display: 'flex',
     flexDirection: 'column',
-    gap: 16,
+    gap: 8,
   })
 
   const tHorizontalCSS = css({
     display: 'flex',
-    gap: 16,
+    gap: 8,
   })
 
   return (
@@ -58,8 +59,9 @@ function App() {
       <h1>Image Process TS</h1>
       <div css={css(tHorizontalCSS)} >
 
-        <aside css={css(tBorderLineCSS, { padding: 3 })} >
+        <aside css={css(tBorderLineCSS, tVerticalCSS, { padding: 8 })} >
           <Process001 tImage={tImage} setResultURL={setResultURL} />
+          <Process002 tImage={tImage} setResultURL={setResultURL} />
         </aside>
 
         <main css={css(tVerticalCSS)} >
