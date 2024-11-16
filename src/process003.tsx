@@ -2,7 +2,7 @@ import { ImageProcessUtility, ImageProcessUtilityProps, ProcessedImage } from ".
 
 export function Process003({ tImage, setResultURL }: ImageProcessUtilityProps) {
     // 二値化
-    const grayscale = ImageProcessUtility({ tImage, setResultURL }, (aImage: ProcessedImage) => {
+    const binary_ize = ImageProcessUtility({ tImage, setResultURL }, (aImage: ProcessedImage) => {
         for (let x = 0; x < aImage.width; x++) {
             for (let y = 0; y < aImage.height; y++) {
                 const tRGB = aImage.data[x][y]
@@ -17,6 +17,6 @@ export function Process003({ tImage, setResultURL }: ImageProcessUtilityProps) {
     })
 
     return (
-        <button onClick={grayscale}>二値化</button>
+        <button onClick={binary_ize}>二値化</button>
     )
 }
