@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { css } from '@emotion/react'
 import { Process001 } from './process001'
 import { Process002 } from './process002'
+import { Process003 } from './process003'
 
 function App() {
   const [tImage, setImage] = useState<HTMLImageElement | null>(null)
@@ -62,6 +63,7 @@ function App() {
         <aside css={css(tBorderLineCSS, tVerticalCSS, { padding: 8 })} >
           <Process001 tImage={tImage} setResultURL={setResultURL} />
           <Process002 tImage={tImage} setResultURL={setResultURL} />
+          <Process003 tImage={tImage} setResultURL={setResultURL} />
         </aside>
 
         <main css={css(tVerticalCSS)} >
