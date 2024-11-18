@@ -69,6 +69,17 @@ export function ImageProcessUtility(
 }
 
 export const ArrayMath = {
+    // stats
+    sMedian: (aArray: number[]) => {
+        const tSorted = aArray.slice().sort((aA, aB) => aA - aB)
+        if (tSorted.length % 2 === 0) {
+            return (tSorted[tSorted.length / 2 - 1] + tSorted[tSorted.length / 2]) / 2
+        } else {
+            return tSorted[(tSorted.length - 1) / 2]
+        }
+    },
+
+    // calc
     add: (aArray1: number[], aArray2: number[]) => aArray1.map((aValue, aI) => aValue + aArray2[aI]),
     sub: (aArray1: number[], aArray2: number[]) => aArray1.map((aValue, aI) => aValue - aArray2[aI]),
     mul: (aArray: number[], aScalar: number) => aArray.map(aValue => aValue * aScalar),
