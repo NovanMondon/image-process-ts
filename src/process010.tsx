@@ -5,11 +5,6 @@ export function Process010({ tImage, setResultURL }: ImageProcessUtilityProps) {
     const median = ImageProcessUtility({ tImage, setResultURL }, (aImage: ProcessedImage) => {
         const tKernelSize = 3
         const tKernelOffset = -1
-        const tKernel = AM.div2D([
-            [1, 2, 1],
-            [2, 4, 2],
-            [1, 2, 1]
-        ], 16)
         const tPadding = [0, 0, 0]
 
         for (let x = 0; x < aImage.width; x++) {
