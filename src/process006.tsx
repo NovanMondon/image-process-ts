@@ -1,4 +1,4 @@
-import { ArrayMath as AM, ImageProcessUtility, ImageProcessUtilityProps, ProcessedImage } from "./utility"
+import { ImageProcessUtility, ImageProcessUtilityProps, ProcessedImage } from "./utility"
 
 export function Process006({ tImage, setResultURL }: ImageProcessUtilityProps) {
     const reduction = ImageProcessUtility({ tImage, setResultURL }, (aImage: ProcessedImage) => {
