@@ -4,7 +4,7 @@ export type ProcessedImage = {
     data: number[][][]
 }
 
-interface ImageProcessUtilityProps {
+export interface ImageProcessUtilityProps {
     tImage: HTMLImageElement | null
     setResultURL: (aURL: string) => void
 }
@@ -66,4 +66,30 @@ export function ImageProcessUtility(
         // 画像を表示
         setResultURL(tCanvas.toDataURL())
     }
+}
+
+export const ArrayMath = {
+    // stats
+    sMedian: (aArray: number[]) => {
+        const tSorted = aArray.slice().sort((aA, aB) => aA - aB)
+        if (tSorted.length % 2 === 0) {
+            return (tSorted[tSorted.length / 2 - 1] + tSorted[tSorted.length / 2]) / 2
+        } else {
+            return tSorted[(tSorted.length - 1) / 2]
+        }
+    },
+
+    // calc
+    add: (aArray1: number[], aArray2: number[]) => aArray1.map((aValue, aI) => aValue + aArray2[aI]),
+    sub: (aArray1: number[], aArray2: number[]) => aArray1.map((aValue, aI) => aValue - aArray2[aI]),
+    mul: (aArray: number[], aScalar: number) => aArray.map(aValue => aValue * aScalar),
+    div: (aArray: number[], aScalar: number) => aArray.map(aValue => aValue / aScalar),
+    max: (aArray1: number[], aArray2: number[]) => aArray1.map((aValue, aI) => Math.max(aValue, aArray2[aI])),
+    min: (aArray1: number[], aArray2: number[]) => aArray1.map((aValue, aI) => Math.min(aValue, aArray2[aI])),
+
+    // 2Dim
+    add2D: (aArray1: number[][], aArray2: number[][]) => aArray1.map((aValue, aI) => ArrayMath.add(aValue, aArray2[aI])),
+    sub2D: (aArray1: number[][], aArray2: number[][]) => aArray1.map((aValue, aI) => ArrayMath.sub(aValue, aArray2[aI])),
+    mul2D: (aArray: number[][], aScalar: number) => aArray.map(aValue => ArrayMath.mul(aValue, aScalar)),
+    div2D: (aArray: number[][], aScalar: number) => aArray.map(aValue => ArrayMath.div(aValue, aScalar)),
 }

@@ -2,6 +2,15 @@
 import { useState } from 'react'
 import { css } from '@emotion/react'
 import { Process001 } from './process001'
+import { Process002 } from './process002'
+import { Process003 } from './process003'
+import { Process004 } from './process004'
+import { Process005 } from './process005'
+import { Process006 } from './process006'
+import { Process007 } from './process007'
+import { Process008 } from './process008'
+import { Process009 } from './process009'
+import { Process010 } from './process010'
 
 function App() {
   const [tImage, setImage] = useState<HTMLImageElement | null>(null)
@@ -45,12 +54,12 @@ function App() {
   const tVerticalCSS = css({
     display: 'flex',
     flexDirection: 'column',
-    gap: 16,
+    gap: 8,
   })
 
   const tHorizontalCSS = css({
     display: 'flex',
-    gap: 16,
+    gap: 8,
   })
 
   return (
@@ -58,8 +67,17 @@ function App() {
       <h1>Image Process TS</h1>
       <div css={css(tHorizontalCSS)} >
 
-        <aside css={css(tBorderLineCSS, { padding: 3 })} >
+        <aside css={css(tBorderLineCSS, tVerticalCSS, { padding: 8 })} >
           <Process001 tImage={tImage} setResultURL={setResultURL} />
+          <Process002 tImage={tImage} setResultURL={setResultURL} />
+          <Process003 tImage={tImage} setResultURL={setResultURL} />
+          <Process004 tImage={tImage} setResultURL={setResultURL} />
+          <Process005 tImage={tImage} setResultURL={setResultURL} />
+          <Process006 tImage={tImage} setResultURL={setResultURL} />
+          <Process007 tImage={tImage} setResultURL={setResultURL} />
+          <Process008 tImage={tImage} setResultURL={setResultURL} />
+          <Process009 tImage={tImage} setResultURL={setResultURL} />
+          <Process010 tImage={tImage} setResultURL={setResultURL} />
         </aside>
 
         <main css={css(tVerticalCSS)} >
