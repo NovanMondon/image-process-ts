@@ -73,4 +73,6 @@ export const ArrayMath = {
     sub: (aArray1: number[], aArray2: number[]) => aArray1.map((aValue, aI) => aValue - aArray2[aI]),
     mul: (aArray: number[], aScalar: number) => aArray.map(aValue => aValue * aScalar),
     div: (aArray: number[], aScalar: number) => aArray.map(aValue => aValue / aScalar),
+    max: (aArray1: number[], aArray2: number[]) => aArray1.map((aValue, aI) => Math.max(aValue, aArray2[aI])),
+    min: (aArray1: number[], aArray2: number[]) => aArray1.map((aValue, aI) => Math.min(aValue, aArray2[aI])),
 }
