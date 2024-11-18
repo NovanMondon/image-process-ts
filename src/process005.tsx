@@ -2,9 +2,6 @@ import { ArrayMath as AM, ImageProcessUtility, ImageProcessUtilityProps, Process
 
 export function Process005({ tImage, setResultURL }: ImageProcessUtilityProps) {
     const rgb2hsv = (aRGB: number[]) => {
-        // const tR = aRGB[0] / 255
-        // const tG = aRGB[1] / 255
-        // const tB = aRGB[2] / 255
         const [tR, tG, tB] = AM.div(aRGB, 255)
         const tMax = Math.max(tR, tG, tB)
         const tMin = Math.min(tR, tG, tB)

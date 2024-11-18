@@ -6,6 +6,7 @@ import { Process002 } from './process002'
 import { Process003 } from './process003'
 import { Process004 } from './process004'
 import { Process005 } from './process005'
+import { Process006 } from './process006'
 
 function App() {
   const [tImage, setImage] = useState<HTMLImageElement | null>(null)
@@ -68,6 +69,7 @@ function App() {
           <Process003 tImage={tImage} setResultURL={setResultURL} />
           <Process004 tImage={tImage} setResultURL={setResultURL} />
           <Process005 tImage={tImage} setResultURL={setResultURL} />
+          <Process006 tImage={tImage} setResultURL={setResultURL} />
         </aside>
 
         <main css={css(tVerticalCSS)} >
