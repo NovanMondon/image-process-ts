@@ -75,4 +75,10 @@ export const ArrayMath = {
     div: (aArray: number[], aScalar: number) => aArray.map(aValue => aValue / aScalar),
     max: (aArray1: number[], aArray2: number[]) => aArray1.map((aValue, aI) => Math.max(aValue, aArray2[aI])),
     min: (aArray1: number[], aArray2: number[]) => aArray1.map((aValue, aI) => Math.min(aValue, aArray2[aI])),
+
+    // 2Dim
+    add2D: (aArray1: number[][], aArray2: number[][]) => aArray1.map((aValue, aI) => ArrayMath.add(aValue, aArray2[aI])),
+    sub2D: (aArray1: number[][], aArray2: number[][]) => aArray1.map((aValue, aI) => ArrayMath.sub(aValue, aArray2[aI])),
+    mul2D: (aArray: number[][], aScalar: number) => aArray.map(aValue => ArrayMath.mul(aValue, aScalar)),
+    div2D: (aArray: number[][], aScalar: number) => aArray.map(aValue => ArrayMath.div(aValue, aScalar)),
 }
