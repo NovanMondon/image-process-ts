@@ -78,6 +78,7 @@ export const ArrayMath = {
             return tSorted[(tSorted.length - 1) / 2]
         }
     },
+    sAverage: (aArray: number[]) => aArray.reduce((aSum, aValue) => aSum + aValue, 0) / aArray.length,
 
     // calc
     add: (aArray1: number[], aArray2: number[]) => aArray1.map((aValue, aI) => aValue + aArray2[aI]),
