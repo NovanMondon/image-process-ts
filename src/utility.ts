@@ -67,3 +67,10 @@ export function ImageProcessUtility(
         setResultURL(tCanvas.toDataURL())
     }
 }
+
+export const ArrayMath = {
+    add: (aArray1: number[], aArray2: number[]) => aArray1.map((aValue, aI) => aValue + aArray2[aI]),
+    sub: (aArray1: number[], aArray2: number[]) => aArray1.map((aValue, aI) => aValue - aArray2[aI]),
+    mul: (aArray: number[], aScalar: number) => aArray.map(aValue => aValue * aScalar),
+    div: (aArray: number[], aScalar: number) => aArray.map(aValue => aValue / aScalar),
+}
