@@ -1,4 +1,4 @@
-import { ImageProcessUtility, ImageProcessUtilityProps, ProcessedImage } from "./utility"
+import { ImageProcessUtility, ImageProcessUtilityProps, newImageData, ProcessedImage } from "./utility"
 import { ArrayMath as AM } from "./utility"
 
 export function Process012({ tImage, setResultURL }: ImageProcessUtilityProps) {
@@ -11,6 +11,7 @@ export function Process012({ tImage, setResultURL }: ImageProcessUtilityProps) {
             [0, 0, 1]
         ], 3)
         const tPadding = [0, 0, 0]
+        const tResultData = newImageData(aImage.width, aImage.height)
 
         for (let x = 0; x < aImage.width; x++) {
             for (let y = 0; y < aImage.height; y++) {
@@ -28,10 +29,11 @@ export function Process012({ tImage, setResultURL }: ImageProcessUtilityProps) {
                         }
                     }
                 }
-                aImage.data[x][y] = tFiltered
+                tResultData[x][y] = tFiltered
             }
         }
 
+        aImage.data = tResultData
         return aImage
     })
 

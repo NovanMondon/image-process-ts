@@ -1,4 +1,4 @@
-import { ImageProcessUtility, ImageProcessUtilityProps, ProcessedImage } from "./utility"
+import { ImageProcessUtility, ImageProcessUtilityProps, newImageData, ProcessedImage } from "./utility"
 import { ArrayMath as AM } from "./utility"
 
 export function Process011({ tImage, setResultURL }: ImageProcessUtilityProps) {
@@ -6,6 +6,7 @@ export function Process011({ tImage, setResultURL }: ImageProcessUtilityProps) {
         const tKernelSize = 3
         const tKernelOffset = -1
         const tPadding = [0, 0, 0]
+        const tResultData = newImageData(aImage.width, aImage.height)
 
         for (let x = 0; x < aImage.width; x++) {
             for (let y = 0; y < aImage.height; y++) {
@@ -26,10 +27,11 @@ export function Process011({ tImage, setResultURL }: ImageProcessUtilityProps) {
 
                 const tAverage = AM.div(tSum, tKernelSize * tKernelSize)
 
-                aImage.data[x][y] = tAverage
+                tResultData[x][y] = tAverage
             }
         }
 
+        aImage.data = tResultData
         return aImage
     })
 

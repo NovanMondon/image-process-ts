@@ -94,3 +94,15 @@ export const ArrayMath = {
     mul2D: (aArray: number[][], aScalar: number) => aArray.map(aValue => ArrayMath.mul(aValue, aScalar)),
     div2D: (aArray: number[][], aScalar: number) => aArray.map(aValue => ArrayMath.div(aValue, aScalar)),
 }
+
+export function newImageData(aWidth: number, aHeight: number): number[][][] {
+    const tData: number[][][] = []
+    for (let x = 0; x < aWidth; x++) {
+        tData[x] = []
+        for (let y = 0; y < aHeight; y++) {
+            tData[x][y] = [0, 0, 0]
+        }
+    }
+    return tData
+}
+
