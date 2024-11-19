@@ -1,8 +1,8 @@
 import { ImageProcessUtility, ImageProcessUtilityProps, ProcessedImage } from "./utility"
 
-export function Process004({ tImage, setResultURL }: ImageProcessUtilityProps) {
+export function Process004({ tImage, setResult }: ImageProcessUtilityProps) {
     // 大津の二値化
-    const binary_ize2 = ImageProcessUtility({ tImage, setResultURL }, (aImage: ProcessedImage) => {
+    const binary_ize2 = ImageProcessUtility({ tImage, setResult }, (aImage: ProcessedImage) => {
         // スレッショルドを求める
         const tHist = new Array(256).fill(0)
         for (let x = 0; x < aImage.width; x++) {

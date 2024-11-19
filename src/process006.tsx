@@ -1,7 +1,7 @@
 import { ImageProcessUtility, ImageProcessUtilityProps, ProcessedImage } from "./utility"
 
-export function Process006({ tImage, setResultURL }: ImageProcessUtilityProps) {
-    const reduction = ImageProcessUtility({ tImage, setResultURL }, (aImage: ProcessedImage) => {
+export function Process006({ tImage, setResult }: ImageProcessUtilityProps) {
+    const reduction = ImageProcessUtility({ tImage, setResult }, (aImage: ProcessedImage) => {
         for (let x = 0; x < aImage.width; x++) {
             for (let y = 0; y < aImage.height; y++) {
                 const tRGB = aImage.data[x][y]

@@ -1,8 +1,8 @@
 import { ImageProcessUtility, ImageProcessUtilityProps, newImageData, ProcessedImage } from "./utility"
 import { ArrayMath as AM } from "./utility"
 
-export function Process011({ tImage, setResultURL }: ImageProcessUtilityProps) {
-    const smoothing = ImageProcessUtility({ tImage, setResultURL }, (aImage: ProcessedImage) => {
+export function Process011({ tImage, setResult }: ImageProcessUtilityProps) {
+    const smoothing = ImageProcessUtility({ tImage, setResult }, (aImage: ProcessedImage) => {
         const tKernelSize = 3
         const tKernelOffset = -1
         const tPadding = [0, 0, 0]

@@ -1,8 +1,7 @@
 import { ImageProcessUtility, ImageProcessUtilityProps, newImageData, ProcessedImage } from "./utility"
-import { ArrayMath as AM } from "./utility"
 
-export function Process013({ tImage, setResultURL }: ImageProcessUtilityProps) {
-    const process = ImageProcessUtility({ tImage, setResultURL }, (aImage: ProcessedImage) => {
+export function Process013({ tImage, setResult }: ImageProcessUtilityProps) {
+    const process = ImageProcessUtility({ tImage, setResult }, (aImage: ProcessedImage) => {
         const tKernelSize = 3
         const tKernelOffset = -1
         const tPadding = [0, 0, 0]

@@ -1,8 +1,8 @@
 import { ImageProcessUtility, ImageProcessUtilityProps, newImageData, ProcessedImage } from "./utility"
 import { ArrayMath as AM } from "./utility"
 
-export function Process009({ tImage, setResultURL }: ImageProcessUtilityProps) {
-    const gaussian = ImageProcessUtility({ tImage, setResultURL }, (aImage: ProcessedImage) => {
+export function Process009({ tImage, setResult }: ImageProcessUtilityProps) {
+    const gaussian = ImageProcessUtility({ tImage, setResult }, (aImage: ProcessedImage) => {
         const tKernelSize = 3
         const tKernelOffset = -1
         const tKernel = AM.div2D([
