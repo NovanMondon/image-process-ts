@@ -116,6 +116,18 @@ export const ArrayMath = {
     sub2D: (aArray1: number[][], aArray2: number[][]) => aArray1.map((aValue, aI) => ArrayMath.sub(aValue, aArray2[aI])),
     mul2D: (aArray: number[][], aScalar: number) => aArray.map(aValue => ArrayMath.mul(aValue, aScalar)),
     div2D: (aArray: number[][], aScalar: number) => aArray.map(aValue => ArrayMath.div(aValue, aScalar)),
+
+    // others
+    new: (aWidth: number, aHeight: number, aInit: number) => {
+        const tArray: number[][] = []
+        for (let x = 0; x < aWidth; x++) {
+            tArray[x] = []
+            for (let y = 0; y < aHeight; y++) {
+                tArray[x][y] = aInit
+            }
+        }
+        return tArray
+    }
 }
 
 export function newImageData(aWidth: number, aHeight: number): number[][][] {
