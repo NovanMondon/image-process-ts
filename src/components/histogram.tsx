@@ -5,22 +5,21 @@ import {
   CategoryScale,
   LinearScale,
   BarElement,
-  Title,
   Tooltip,
-  Legend,
 } from "chart.js";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(LinearScale, BarElement, Tooltip);
 
-const Histogram = ({ data }: any) => {
+export type HistogramProp = {
+    values: number[]
+}
+
+const Histogram = (arg : {prop: HistogramProp}) => {
   const chartData = {
-    labels: data.labels, // x軸のラベル
     datasets: [
       {
         label: "Frequency",
-        data: data.values, // ヒストグラムのデータ
-        backgroundColor: "rgba(75, 192, 192, 0.5)",
-        borderColor: "rgba(75, 192, 192, 1)",
+        data: arg.prop.values.map((value, index) => ({x: index, y: value})),
         borderWidth: 1,
       },
     ],
@@ -28,25 +27,12 @@ const Histogram = ({ data }: any) => {
 
   const options = {
     responsive: true,
-    plugins: {
-      legend: {
-        display: true,
-        position: "top" as const,
-      },
-      title: {
-        display: true,
-        text: "ヒストグラム",
-      },
-    },
     scales: {
       x: {
-        beginAtZero: true,
-      },
-      y: {
-        beginAtZero: true,
+        type: "linear",
       },
     },
-  };
+  } as const;
 
   return <Bar data={chartData} options={options} />;
 };

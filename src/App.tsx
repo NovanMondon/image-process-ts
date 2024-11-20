@@ -20,15 +20,19 @@ import { Process016 } from './process016'
 import { Process017 } from './process017'
 import { Process018 } from './process018'
 import { Process019 } from './process019'
-import Histogram from './components/histogram'
+import Histogram, { HistogramProp } from './components/histogram'
 
 export type ResultState = {
   imageURL: string[]
+  histogramProp: HistogramProp | null
 }
 
 function App() {
   const [tImage, setImage] = useState<HTMLImageElement | null>(null)
-  const [tResult, setResult] = useState<ResultState>({ imageURL: [] })
+  const [tResult, setResult] = useState<ResultState>({
+    imageURL: [],
+    histogramProp: null
+  })
 
   // ファイルを選択して画像を読み込む
   const handleFileChange = (aEvent: React.ChangeEvent<HTMLInputElement>) => {
@@ -122,10 +126,9 @@ function App() {
                 {<img src={tResult.imageURL[1]} alt="Result" />}
               </div>
             }
-            <Histogram data={{
-              labels: ["Bin 1", "Bin 2", "Bin 3", "Bin 4"],
-              values: [10, 20, 30, 40], // 各ビンの頻度データ
-            }} />
+            {tResult.histogramProp &&
+              <Histogram prop={tResult.histogramProp} />
+            }
           </div>
         </main>
 
