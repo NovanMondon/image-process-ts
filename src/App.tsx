@@ -20,6 +20,7 @@ import { Process016 } from './process016'
 import { Process017 } from './process017'
 import { Process018 } from './process018'
 import { Process019 } from './process019'
+import Histogram from './components/histogram'
 
 export type ResultState = {
   imageURL: string[]
@@ -121,6 +122,10 @@ function App() {
                 {<img src={tResult.imageURL[1]} alt="Result" />}
               </div>
             }
+            <Histogram data={{
+              labels: ["Bin 1", "Bin 2", "Bin 3", "Bin 4"],
+              values: [10, 20, 30, 40], // 各ビンの頻度データ
+            }} />
           </div>
         </main>
 
