@@ -20,40 +20,18 @@ export function ImageProcessUtility(
     return () => {
         if (!tImage) return
 
-        // Canvasを作成
-        const tCanvas = document.createElement('canvas')
-        const tContext = tCanvas.getContext('2d')
-        if (!tContext) return
-        tCanvas.width = tImage.width
-        tCanvas.height = tImage.height
-        // console.log(tCanvas.width, tCanvas.height);
-
-        // 画像をCanvasに描画
-        tContext.drawImage(tImage, 0, 0)
-
         // 画像データを取得
-        const tImageData = tContext.getImageData(0, 0, tImage.width, tImage.height)
-        const tData = tImageData.data
-
-        const tProcessedImage: ProcessedImage = {
-            width: tImage.width,
-            height: tImage.height,
-            data: []
-        }
-        for (let x = 0; x < tImage.width; x++) {
-            tProcessedImage.data[x] = []
-            for (let y = 0; y < tImage.height; y++) {
-                const tIndex = (y * tImage.width + x) * 4
-                tProcessedImage.data[x][y] = [tData[tIndex], tData[tIndex + 1], tData[tIndex + 2]]
-            }
-        }
+        const tData = LoadImageData(tImage)
+        const tProcessedImage: ProcessedImage = CalcImage(tData)
 
         // 画像データを処理
-        let tResult: ResultState = { imageURL: [] }
         let tProcessedImages: ProcessedImage | ProcessedImage[] = aProcess(tProcessedImage)
         if (!Array.isArray(tProcessedImages)) {
             tProcessedImages = [tProcessedImages]
         }
+
+        // 画像データを描画
+        let tResult: ResultState = new ResultState()
         for (let i = 0; i < tProcessedImages.length; i++) {
             const tCanvas = document.createElement('canvas')
             const tContext = tCanvas.getContext('2d')
@@ -75,6 +53,40 @@ export function ImageProcessUtility(
         // 画像を表示
         setResult(tResult)
     }
+}
+
+export function LoadImageData(aImageElement: HTMLImageElement): Uint8ClampedArray {
+    // Canvasを作成
+    const tCanvas = document.createElement('canvas')
+    const tContext = tCanvas.getContext('2d')
+    if (!tContext) throw new Error('Canvasの取得に失敗しました')
+    tCanvas.width = aImageElement.width
+    tCanvas.height = aImageElement.height
+
+    // 画像をCanvasに描画
+    tContext.drawImage(aImageElement, 0, 0)
+
+    // 画像データを取得
+    const tImageData = tContext.getImageData(0, 0, aImageElement.width, aImageElement.height)
+    const tData = tImageData.data
+
+    return tData
+}
+
+export function CalcImage(aData: Uint8ClampedArray): ProcessedImage {
+    const tImage: ProcessedImage = {
+        width: 0,
+        height: 0,
+        data: []
+    }
+    for (let x = 0; x < tImage.width; x++) {
+        tImage.data[x] = []
+        for (let y = 0; y < tImage.height; y++) {
+            const tIndex = (y * tImage.width + x) * 4
+            tImage.data[x][y] = [aData[tIndex], aData[tIndex + 1], aData[tIndex + 2]]
+        }
+    }
+    return tImage
 }
 
 function calcResultData(aImage: ProcessedImage): Uint8ClampedArray {

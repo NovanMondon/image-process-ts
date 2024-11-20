@@ -1,25 +1,18 @@
-import React from "react";
 import { Bar } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Tooltip,
-} from "chart.js";
+import { Chart, LinearScale, BarElement, Tooltip } from "chart.js";
 
-ChartJS.register(LinearScale, BarElement, Tooltip);
+Chart.register(LinearScale, BarElement, Tooltip);
 
 export type HistogramProp = {
-    values: number[]
+  values: number[]
 }
 
-const Histogram = (arg : {prop: HistogramProp}) => {
+const Histogram = (arg: { prop: HistogramProp }) => {
   const chartData = {
     datasets: [
       {
         label: "Frequency",
-        data: arg.prop.values.map((value, index) => ({x: index, y: value})),
+        data: arg.prop.values.map((value, index) => ({ x: index, y: value })),
         borderWidth: 1,
       },
     ],

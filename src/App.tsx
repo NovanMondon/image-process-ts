@@ -22,17 +22,19 @@ import { Process018 } from './process018'
 import { Process019 } from './process019'
 import Histogram, { HistogramProp } from './components/histogram'
 
-export type ResultState = {
+export class ResultState {
   imageURL: string[]
   histogramProp: HistogramProp | null
+
+  constructor() {
+    this.imageURL = []
+    this.histogramProp = null
+  }
 }
 
 function App() {
   const [tImage, setImage] = useState<HTMLImageElement | null>(null)
-  const [tResult, setResult] = useState<ResultState>({
-    imageURL: [],
-    histogramProp: null
-  })
+  const [tResult, setResult] = useState<ResultState>(new ResultState())
 
   // ファイルを選択して画像を読み込む
   const handleFileChange = (aEvent: React.ChangeEvent<HTMLInputElement>) => {
