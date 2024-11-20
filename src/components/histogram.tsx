@@ -8,12 +8,19 @@ export type HistogramProp = {
 }
 
 const Histogram = (arg: { prop: HistogramProp }) => {
+  const tValues = arg.prop.values
+  let tData: {}[] = []
+  for (let i = 0; i < tValues.length; i++) {
+    tData.push({ x: i, y: tValues[i] })
+  }
+
   const chartData = {
     datasets: [
       {
         label: "Frequency",
-        data: arg.prop.values.map((value, index) => ({ x: index, y: value })),
-        borderWidth: 1,
+        data: tData,
+        borderWidth: 0,
+        backgroundColor: "rgba(0, 128, 128, 0.5)",
       },
     ],
   };
@@ -25,6 +32,8 @@ const Histogram = (arg: { prop: HistogramProp }) => {
         type: "linear",
       },
     },
+    barPercentage: 1.0,
+    categoryPercentage: 1.0,
   } as const;
 
   return <Bar data={chartData} options={options} />;

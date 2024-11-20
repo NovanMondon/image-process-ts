@@ -72,6 +72,11 @@ function App() {
     },
   })
 
+  const tGraphViewCSS = css({
+    width: 1024,
+    height: 512,
+  })
+
   const tVerticalCSS = css({
     display: 'flex',
     flexDirection: 'column',
@@ -81,6 +86,10 @@ function App() {
   const tHorizontalCSS = css({
     display: 'flex',
     gap: 8,
+  })
+
+  const tEnableNewLineCSS = css({
+    flexWrap: 'wrap',
   })
 
   return (
@@ -113,7 +122,7 @@ function App() {
 
         <main css={css(tVerticalCSS)} >
           <input type="file" onChange={handleFileChange} />
-          <div css={css(tHorizontalCSS)} >
+          <div css={css(tHorizontalCSS, tEnableNewLineCSS)} >
             <div css={css(tImageViewCSS, tBorderLineCSS)}
               onDrop={handleDrop}
               onDragOver={(aEvent) => aEvent.preventDefault()} // ドロップを許可
@@ -131,7 +140,9 @@ function App() {
               </div>
             }
             {tResult.histogramProp &&
-              <Histogram prop={tResult.histogramProp} />
+              <div css={css(tGraphViewCSS, tBorderLineCSS)} >
+                <Histogram prop={tResult.histogramProp} />
+              </div>
             }
           </div>
         </main>

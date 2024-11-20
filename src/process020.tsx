@@ -1,6 +1,5 @@
 import { ResultState } from "./App"
-import { CalcImage, ImageProcessUtility, ImageProcessUtilityProps, LoadImageData, newImageData, ProcessedImage } from "./utility"
-import { ArrayMath as AM } from "./utility"
+import { CalcImage, ImageProcessUtilityProps, LoadImageData, ProcessedImage } from "./utility"
 
 export function Process020({ tImage, setResult }: ImageProcessUtilityProps) {
     const process = () => {
