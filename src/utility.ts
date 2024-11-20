@@ -22,7 +22,7 @@ export function ImageProcessUtility(
 
         // 画像データを取得
         const tData = LoadImageData(tImage)
-        const tProcessedImage: ProcessedImage = CalcImage(tData)
+        const tProcessedImage: ProcessedImage = CalcImage(tData, tImage.width, tImage.height)
 
         // 画像データを処理
         let tProcessedImages: ProcessedImage | ProcessedImage[] = aProcess(tProcessedImage)
@@ -73,11 +73,11 @@ export function LoadImageData(aImageElement: HTMLImageElement): Uint8ClampedArra
     return tData
 }
 
-export function CalcImage(aData: Uint8ClampedArray): ProcessedImage {
+export function CalcImage(aData: Uint8ClampedArray, aWidth: number, aHeight: number): ProcessedImage {
     const tImage: ProcessedImage = {
-        width: 0,
-        height: 0,
-        data: []
+        width: aWidth,
+        height: aHeight,
+        data: newImageData(aWidth, aHeight),
     }
     for (let x = 0; x < tImage.width; x++) {
         tImage.data[x] = []
