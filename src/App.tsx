@@ -96,8 +96,7 @@ function App() {
     <div>
       <h1>Image Process TS</h1>
       <div css={css(tHorizontalCSS)} >
-
-        <aside css={css(tBorderLineCSS, tVerticalCSS, { padding: 8 })} >
+        <aside css={css(tBorderLineCSS, tVerticalCSS, { padding: 8, width: 160, flexShrink:0, height: 720, overflow: "auto" })} >
           <Process001 tImage={tImage} setResult={setResult} />
           <Process002 tImage={tImage} setResult={setResult} />
           <Process003 tImage={tImage} setResult={setResult} />
