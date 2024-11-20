@@ -14,8 +14,9 @@ export function Process020({ tImage, setResult }: ImageProcessUtilityProps) {
         for (let x = 0; x < tProcessedImage.width; x++) {
             for (let y = 0; y < tProcessedImage.height; y++) {
                 const tRGB = tProcessedImage.data[x][y]
-                const tGray = tRGB[0] * 0.2126 + tRGB[1] * 0.7152 + tRGB[2] * 0.0722
-                tHistogramData[Math.floor(tGray)]++
+                tRGB.forEach((aValue) => {
+                    tHistogramData[aValue]++
+                })
             }
         }
 

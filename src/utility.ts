@@ -33,22 +33,9 @@ export function ImageProcessUtility(
         // 画像データを描画
         let tResult: ResultState = new ResultState()
         for (let i = 0; i < tProcessedImages.length; i++) {
-            const tCanvas = document.createElement('canvas')
-            const tContext = tCanvas.getContext('2d')
-            if (!tContext) return
-            tCanvas.width = tImage.width
-            tCanvas.height = tImage.height
+            const tResultData = CalcResultData(tProcessedImages[i])
 
-            const tProcessedImage = tProcessedImages[i]
-            const tProcessedData = calcResultData(tProcessedImage)
-
-            const tProcessedImageData = tContext.createImageData(tImage.width, tImage.height)
-
-            tProcessedImageData.data.set(tProcessedData)
-            // 画像データをCanvasに描画
-            tContext.putImageData(tProcessedImageData, 0, 0)
-
-            tResult.imageURL.push(tCanvas.toDataURL())
+            tResult.imageURL.push(GenerateImageURL(tResultData, tProcessedImages[i].width, tProcessedImages[i].height))
         }
         // 画像を表示
         setResult(tResult)
@@ -89,7 +76,7 @@ export function CalcImage(aData: Uint8ClampedArray, aWidth: number, aHeight: num
     return tImage
 }
 
-function calcResultData(aImage: ProcessedImage): Uint8ClampedArray {
+export function CalcResultData(aImage: ProcessedImage): Uint8ClampedArray {
     const tResultData = new Uint8ClampedArray(aImage.width * aImage.height * 4)
     for (let x = 0; x < aImage.width; x++) {
         for (let y = 0; y < aImage.height; y++) {
@@ -101,6 +88,20 @@ function calcResultData(aImage: ProcessedImage): Uint8ClampedArray {
         }
     }
     return tResultData
+}
+
+export function GenerateImageURL(aData: Uint8ClampedArray, aWidth: number, aHeight: number): string {
+    const tCanvas = document.createElement('canvas')
+    const tContext = tCanvas.getContext('2d')
+    if (!tContext) throw new Error('Canvasの取得に失敗しました')
+    tCanvas.width = aWidth
+    tCanvas.height = aHeight
+
+    const tImageData = tContext.createImageData(aWidth, aHeight)
+    tImageData.data.set(aData)
+    tContext.putImageData(tImageData, 0, 0)
+
+    return tCanvas.toDataURL()
 }
 
 export const ArrayMath = {
