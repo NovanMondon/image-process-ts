@@ -1,11 +1,12 @@
-import { ImageProcessUtility, ImageProcessUtilityProps, ProcessedImage } from "./utility"
+import { ImageProcessUtility, ImageProcessUtilityProps, newImageData, ProcessedImage } from "./utility"
 import { ArrayMath as AM } from "./utility"
 
-export function Process010({ tImage, setResultURL }: ImageProcessUtilityProps) {
-    const median = ImageProcessUtility({ tImage, setResultURL }, (aImage: ProcessedImage) => {
+export function Process010({ tImage, setResult }: ImageProcessUtilityProps) {
+    const median = ImageProcessUtility({ tImage, setResult }, (aImage: ProcessedImage) => {
         const tKernelSize = 3
         const tKernelOffset = -1
         const tPadding = [0, 0, 0]
+        const tResultData = newImageData(aImage.width, aImage.height)
 
         for (let x = 0; x < aImage.width; x++) {
             for (let y = 0; y < aImage.height; y++) {
@@ -25,10 +26,11 @@ export function Process010({ tImage, setResultURL }: ImageProcessUtilityProps) {
                 }
                 const tMedian = tRGBs.map(tRGB => AM.sMedian(tRGB))
 
-                aImage.data[x][y] = tMedian
+                tResultData[x][y] = tMedian
             }
         }
 
+        aImage.data = tResultData
         return aImage
     })
 

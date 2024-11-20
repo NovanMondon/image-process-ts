@@ -1,8 +1,8 @@
 import { ImageProcessUtility, ImageProcessUtilityProps, ProcessedImage } from "./utility"
 
-export function Process003({ tImage, setResultURL }: ImageProcessUtilityProps) {
+export function Process003({ tImage, setResult }: ImageProcessUtilityProps) {
     // 二値化
-    const binary_ize = ImageProcessUtility({ tImage, setResultURL }, (aImage: ProcessedImage) => {
+    const binary_ize = ImageProcessUtility({ tImage, setResult }, (aImage: ProcessedImage) => {
         for (let x = 0; x < aImage.width; x++) {
             for (let y = 0; y < aImage.height; y++) {
                 const tRGB = aImage.data[x][y]

@@ -1,8 +1,8 @@
 import { ImageProcessUtility, ImageProcessUtilityProps, ProcessedImage } from "./utility"
 
-export function Process001({ tImage, setResultURL }: ImageProcessUtilityProps) {
+export function Process001({ tImage, setResult }: ImageProcessUtilityProps) {
     // RGBをBGRに変換
-    const rgb2bgr = ImageProcessUtility({ tImage, setResultURL }, (aImage: ProcessedImage) => {
+    const rgb2bgr = ImageProcessUtility({ tImage, setResult }, (aImage: ProcessedImage) => {
         for (let x = 0; x < aImage.width; x++) {
             for (let y = 0; y < aImage.height; y++) {
                 const tRGB = aImage.data[x][y]

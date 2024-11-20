@@ -1,8 +1,8 @@
 import { ImageProcessUtility, ImageProcessUtilityProps, ProcessedImage } from "./utility"
 import { ArrayMath as AM } from "./utility"
 
-export function Process007({ tImage, setResultURL }: ImageProcessUtilityProps) {
-    const mean_pooling = ImageProcessUtility({ tImage, setResultURL }, (aImage: ProcessedImage) => {
+export function Process007({ tImage, setResult }: ImageProcessUtilityProps) {
+    const mean_pooling = ImageProcessUtility({ tImage, setResult }, (aImage: ProcessedImage) => {
         const tGridSize = 8
         for (let tGridX = 0; tGridX < aImage.width / tGridSize; tGridX++) {
             for (let tGridY = 0; tGridY < aImage.height / tGridSize; tGridY++) {

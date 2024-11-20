@@ -1,15 +1,15 @@
 import { ImageProcessUtility, ImageProcessUtilityProps, newImageData, ProcessedImage } from "./utility"
 import { ArrayMath as AM } from "./utility"
 
-export function Process009({ tImage, setResult }: ImageProcessUtilityProps) {
-    const gaussian = ImageProcessUtility({ tImage, setResult }, (aImage: ProcessedImage) => {
+export function Process012({ tImage, setResult }: ImageProcessUtilityProps) {
+    const process = ImageProcessUtility({ tImage, setResult }, (aImage: ProcessedImage) => {
         const tKernelSize = 3
         const tKernelOffset = -1
         const tKernel = AM.div2D([
-            [1, 2, 1],
-            [2, 4, 2],
-            [1, 2, 1]
-        ], 16)
+            [1, 0, 0],
+            [0, 1, 0],
+            [0, 0, 1]
+        ], 3)
         const tPadding = [0, 0, 0]
         const tResultData = newImageData(aImage.width, aImage.height)
 
@@ -38,6 +38,6 @@ export function Process009({ tImage, setResult }: ImageProcessUtilityProps) {
     })
 
     return (
-        <button onClick={gaussian}>ガウシアンフィルタ</button>
+        <button onClick={process}>モーションフィルタ</button>
     )
 }

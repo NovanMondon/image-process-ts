@@ -1,8 +1,8 @@
 import { ImageProcessUtility, ImageProcessUtilityProps, ProcessedImage } from "./utility"
 
-export function Process002({ tImage, setResultURL }: ImageProcessUtilityProps) {
+export function Process002({ tImage, setResult }: ImageProcessUtilityProps) {
     // グレースケールに変換
-    const grayscale = ImageProcessUtility({ tImage, setResultURL }, (aImage: ProcessedImage) => {
+    const grayscale = ImageProcessUtility({ tImage, setResult }, (aImage: ProcessedImage) => {
         for (let x = 0; x < aImage.width; x++) {
             for (let y = 0; y < aImage.height; y++) {
                 const tRGB = aImage.data[x][y]

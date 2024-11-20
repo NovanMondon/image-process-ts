@@ -1,6 +1,6 @@
 import { ArrayMath as AM, ImageProcessUtility, ImageProcessUtilityProps, ProcessedImage } from "./utility"
 
-export function Process005({ tImage, setResultURL }: ImageProcessUtilityProps) {
+export function Process005({ tImage, setResult }: ImageProcessUtilityProps) {
     const rgb2hsv = (aRGB: number[]) => {
         const [tR, tG, tB] = AM.div(aRGB, 255)
         const tMax = Math.max(tR, tG, tB)
@@ -33,7 +33,7 @@ export function Process005({ tImage, setResultURL }: ImageProcessUtilityProps) {
         return AM.mul(tRGB, 255)
     }
     // HSV: H反転
-    const hsv_invH = ImageProcessUtility({ tImage, setResultURL }, (aImage: ProcessedImage) => {
+    const hsv_invH = ImageProcessUtility({ tImage, setResult }, (aImage: ProcessedImage) => {
         for (let x = 0; x < aImage.width; x++) {
             for (let y = 0; y < aImage.height; y++) {
                 const tRGB = aImage.data[x][y]
