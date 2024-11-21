@@ -125,6 +125,7 @@ export const ArrayMath = {
     div: (aArray: number[], aScalar: number) => aArray.map(aValue => aValue / aScalar),
     max: (aArray1: number[], aArray2: number[]) => aArray1.map((aValue, aI) => Math.max(aValue, aArray2[aI])),
     min: (aArray1: number[], aArray2: number[]) => aArray1.map((aValue, aI) => Math.min(aValue, aArray2[aI])),
+    addAll: (...aArrays: number[][]) => aArrays.reduce((aSum, aValue) => ArrayMath.add(aSum, aValue)),
 
     // 2Dim
     add2D: (aArray1: number[][], aArray2: number[][]) => aArray1.map((aValue, aI) => ArrayMath.add(aValue, aArray2[aI])),
