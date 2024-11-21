@@ -1,5 +1,4 @@
-import { ImageProcessUtility, ImageProcessUtilityProps, newImageData, ProcessedImage } from "./utility"
-import { ArrayMath as AM } from "./utility"
+import { ImageProcessUtility, ImageProcessUtilityProps, ProcessedImage } from "./utility"
 
 export function Process024({ tImage, setResult }: ImageProcessUtilityProps) {
     const process = ImageProcessUtility({ tImage, setResult }, (aImage: ProcessedImage) => {
