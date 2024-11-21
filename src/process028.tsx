@@ -1,5 +1,4 @@
 import { ImageProcessUtility, ImageProcessUtilityProps, newImageData, ProcessedImage } from "./utility"
-import { ArrayMath as AM } from "./utility"
 
 export function Process028({ tImage, setResult }: ImageProcessUtilityProps) {
     const affineInverse = (a: number, b: number, c: number, d: number, tx: number, ty: number, x: number, y: number) => {
