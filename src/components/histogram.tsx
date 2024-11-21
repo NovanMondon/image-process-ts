@@ -30,6 +30,8 @@ const Histogram = (arg: { prop: HistogramProp }) => {
     scales: {
       x: {
         type: "linear",
+        min: 0,
+        max: tValues.length - 1
       },
     },
     barPercentage: 1.0,

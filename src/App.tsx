@@ -22,6 +22,16 @@ import { Process018 } from './process018'
 import { Process019 } from './process019'
 import Histogram, { HistogramProp } from './components/histogram'
 import { Process020 } from './process020'
+import { Process021 } from './process021'
+import { Process022 } from './process022'
+import { Process023 } from './process023'
+import { Process024 } from './process024'
+import { Process025 } from './process025'
+import { Process026 } from './process026'
+import { Process027 } from './process027'
+import { Process028 } from './process028'
+import { Process029 } from './process029'
+import { Process030 } from './process030'
 
 export class ResultState {
   imageURL: string[]
@@ -96,8 +106,7 @@ function App() {
     <div>
       <h1>Image Process TS</h1>
       <div css={css(tHorizontalCSS)} >
-
-        <aside css={css(tBorderLineCSS, tVerticalCSS, { padding: 8 })} >
+        <aside css={css(tBorderLineCSS, tVerticalCSS, { padding: 8, width: 160, flexShrink:0, height: 720, overflow: "auto" })} >
           <Process001 tImage={tImage} setResult={setResult} />
           <Process002 tImage={tImage} setResult={setResult} />
           <Process003 tImage={tImage} setResult={setResult} />
@@ -118,6 +127,16 @@ function App() {
           <Process018 tImage={tImage} setResult={setResult} />
           <Process019 tImage={tImage} setResult={setResult} />
           <Process020 tImage={tImage} setResult={setResult} />
+          <Process021 tImage={tImage} setResult={setResult} />
+          <Process022 tImage={tImage} setResult={setResult} />
+          <Process023 tImage={tImage} setResult={setResult} />
+          <Process024 tImage={tImage} setResult={setResult} />
+          <Process025 tImage={tImage} setResult={setResult} />
+          <Process026 tImage={tImage} setResult={setResult} />
+          <Process027 tImage={tImage} setResult={setResult} />
+          <Process028 tImage={tImage} setResult={setResult} />
+          <Process029 tImage={tImage} setResult={setResult} />
+          <Process030 tImage={tImage} setResult={setResult} />
         </aside>
 
         <main css={css(tVerticalCSS)} >

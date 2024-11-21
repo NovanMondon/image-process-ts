@@ -33,22 +33,9 @@ export function ImageProcessUtility(
         // 画像データを描画
         let tResult: ResultState = new ResultState()
         for (let i = 0; i < tProcessedImages.length; i++) {
-            const tCanvas = document.createElement('canvas')
-            const tContext = tCanvas.getContext('2d')
-            if (!tContext) return
-            tCanvas.width = tImage.width
-            tCanvas.height = tImage.height
+            const tResultData = CalcResultData(tProcessedImages[i])
 
-            const tProcessedImage = tProcessedImages[i]
-            const tProcessedData = calcResultData(tProcessedImage)
-
-            const tProcessedImageData = tContext.createImageData(tImage.width, tImage.height)
-
-            tProcessedImageData.data.set(tProcessedData)
-            // 画像データをCanvasに描画
-            tContext.putImageData(tProcessedImageData, 0, 0)
-
-            tResult.imageURL.push(tCanvas.toDataURL())
+            tResult.imageURL.push(GenerateImageURL(tResultData, tProcessedImages[i].width, tProcessedImages[i].height))
         }
         // 画像を表示
         setResult(tResult)
@@ -89,7 +76,7 @@ export function CalcImage(aData: Uint8ClampedArray, aWidth: number, aHeight: num
     return tImage
 }
 
-function calcResultData(aImage: ProcessedImage): Uint8ClampedArray {
+export function CalcResultData(aImage: ProcessedImage): Uint8ClampedArray {
     const tResultData = new Uint8ClampedArray(aImage.width * aImage.height * 4)
     for (let x = 0; x < aImage.width; x++) {
         for (let y = 0; y < aImage.height; y++) {
@@ -103,6 +90,20 @@ function calcResultData(aImage: ProcessedImage): Uint8ClampedArray {
     return tResultData
 }
 
+export function GenerateImageURL(aData: Uint8ClampedArray, aWidth: number, aHeight: number): string {
+    const tCanvas = document.createElement('canvas')
+    const tContext = tCanvas.getContext('2d')
+    if (!tContext) throw new Error('Canvasの取得に失敗しました')
+    tCanvas.width = aWidth
+    tCanvas.height = aHeight
+
+    const tImageData = tContext.createImageData(aWidth, aHeight)
+    tImageData.data.set(aData)
+    tContext.putImageData(tImageData, 0, 0)
+
+    return tCanvas.toDataURL()
+}
+
 export const ArrayMath = {
     // stats
     sMedian: (aArray: number[]) => {
@@ -114,6 +115,8 @@ export const ArrayMath = {
         }
     },
     sAverage: (aArray: number[]) => aArray.reduce((aSum, aValue) => aSum + aValue, 0) / aArray.length,
+    sVariance: (aArray: number[], aAverage: number) => aArray.reduce((aSum, aValue) => aSum + (aValue - aAverage) ** 2, 0) / aArray.length,
+    sStandardDeviation: (aArray: number[], aAverage: number) => Math.sqrt(ArrayMath.sVariance(aArray, aAverage)),
 
     // calc
     add: (aArray1: number[], aArray2: number[]) => aArray1.map((aValue, aI) => aValue + aArray2[aI]),
@@ -122,6 +125,7 @@ export const ArrayMath = {
     div: (aArray: number[], aScalar: number) => aArray.map(aValue => aValue / aScalar),
     max: (aArray1: number[], aArray2: number[]) => aArray1.map((aValue, aI) => Math.max(aValue, aArray2[aI])),
     min: (aArray1: number[], aArray2: number[]) => aArray1.map((aValue, aI) => Math.min(aValue, aArray2[aI])),
+    addAll: (...aArrays: number[][]) => aArrays.reduce((aSum, aValue) => ArrayMath.add(aSum, aValue)),
 
     // 2Dim
     add2D: (aArray1: number[][], aArray2: number[][]) => aArray1.map((aValue, aI) => ArrayMath.add(aValue, aArray2[aI])),
