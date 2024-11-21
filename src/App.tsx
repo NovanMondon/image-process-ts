@@ -25,6 +25,7 @@ import { Process020 } from './process020'
 import { Process021 } from './process021'
 import { Process022 } from './process022'
 import { Process023 } from './process023'
+import { Process024 } from './process024'
 
 export class ResultState {
   imageURL: string[]
@@ -123,6 +124,7 @@ function App() {
           <Process021 tImage={tImage} setResult={setResult} />
           <Process022 tImage={tImage} setResult={setResult} />
           <Process023 tImage={tImage} setResult={setResult} />
+          <Process024 tImage={tImage} setResult={setResult} />
         </aside>
 
         <main css={css(tVerticalCSS)} >
