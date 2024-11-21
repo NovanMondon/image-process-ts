@@ -23,6 +23,7 @@ import { Process019 } from './process019'
 import Histogram, { HistogramProp } from './components/histogram'
 import { Process020 } from './process020'
 import { Process021 } from './process021'
+import { Process022 } from './process022'
 
 export class ResultState {
   imageURL: string[]
@@ -119,6 +120,7 @@ function App() {
           <Process019 tImage={tImage} setResult={setResult} />
           <Process020 tImage={tImage} setResult={setResult} />
           <Process021 tImage={tImage} setResult={setResult} />
+          <Process022 tImage={tImage} setResult={setResult} />
         </aside>
 
         <main css={css(tVerticalCSS)} >

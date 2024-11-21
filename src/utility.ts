@@ -115,6 +115,8 @@ export const ArrayMath = {
         }
     },
     sAverage: (aArray: number[]) => aArray.reduce((aSum, aValue) => aSum + aValue, 0) / aArray.length,
+    sVariance: (aArray: number[], aAverage: number) => aArray.reduce((aSum, aValue) => aSum + (aValue - aAverage) ** 2, 0) / aArray.length,
+    sStandardDeviation: (aArray: number[], aAverage: number) => Math.sqrt(ArrayMath.sVariance(aArray, aAverage)),
 
     // calc
     add: (aArray1: number[], aArray2: number[]) => aArray1.map((aValue, aI) => aValue + aArray2[aI]),
