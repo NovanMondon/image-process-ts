@@ -32,6 +32,7 @@ import { Process027 } from './process027'
 import { Process028 } from './process028'
 import { Process029 } from './process029'
 import { Process030 } from './process030'
+import { Process031 } from './process031'
 
 export class ResultState {
   imageURL: string[]
@@ -137,6 +138,7 @@ function App() {
           <Process028 tImage={tImage} setResult={setResult} />
           <Process029 tImage={tImage} setResult={setResult} />
           <Process030 tImage={tImage} setResult={setResult} />
+          <Process031 tImage={tImage} setResult={setResult} />
         </aside>
 
         <main css={css(tVerticalCSS)} >
@@ -148,16 +150,11 @@ function App() {
             >
               {tImage && <img src={tImage.src} alt="Original" />}
             </div>
-            {tResult.imageURL[0] &&
-              <div css={css(tImageViewCSS, tBorderLineCSS)} >
-                {<img src={tResult.imageURL[0]} alt="Result" />}
+            {tResult.imageURL.map((url, index) => (
+              <div key={index} css={css(tImageViewCSS, tBorderLineCSS)} >
+              <img src={url} alt={`Result ${index}`} />
               </div>
-            }
-            {tResult.imageURL[1] &&
-              <div css={css(tImageViewCSS, tBorderLineCSS)} >
-                {<img src={tResult.imageURL[1]} alt="Result" />}
-              </div>
-            }
+            ))}
             {tResult.histogramProp &&
               <div css={css(tGraphViewCSS, tBorderLineCSS)} >
                 <Histogram prop={tResult.histogramProp} />
