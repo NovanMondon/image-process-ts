@@ -133,6 +133,11 @@ export const ArrayMath = {
     mul2D: (aArray: number[][], aScalar: number) => aArray.map(aValue => ArrayMath.mul(aValue, aScalar)),
     div2D: (aArray: number[][], aScalar: number) => aArray.map(aValue => ArrayMath.div(aValue, aScalar)),
 
+    compMul: (aArray1: number[], aArray2: number[]) => {
+        return [aArray1[0] * aArray2[0] - aArray1[1] * aArray2[1], aArray1[0] * aArray2[1] + aArray1[1] * aArray2[0]]
+    },
+    compAbs: (aArray: number[]) => Math.sqrt(aArray[0] ** 2 + aArray[1] ** 2),
+
     // others
     new: (aWidth: number, aHeight: number, aInit: number) => {
         const tArray: number[][] = []

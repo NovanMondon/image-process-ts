@@ -33,6 +33,7 @@ import { Process028 } from './process028'
 import { Process029 } from './process029'
 import { Process030 } from './process030'
 import { Process031 } from './process031'
+import { Process032 } from './process032'
 
 export class ResultState {
   imageURL: string[]
@@ -107,7 +108,7 @@ function App() {
     <div>
       <h1>Image Process TS</h1>
       <div css={css(tHorizontalCSS)} >
-        <aside css={css(tBorderLineCSS, tVerticalCSS, { padding: 8, width: 160, flexShrink:0, height: 720, overflow: "auto" })} >
+        <aside css={css(tBorderLineCSS, tVerticalCSS, { padding: 8, width: 160, flexShrink: 0, height: 720, overflow: "auto" })} >
           <Process001 tImage={tImage} setResult={setResult} />
           <Process002 tImage={tImage} setResult={setResult} />
           <Process003 tImage={tImage} setResult={setResult} />
@@ -139,6 +140,7 @@ function App() {
           <Process029 tImage={tImage} setResult={setResult} />
           <Process030 tImage={tImage} setResult={setResult} />
           <Process031 tImage={tImage} setResult={setResult} />
+          <Process032 tImage={tImage} setResult={setResult} />
         </aside>
 
         <main css={css(tVerticalCSS)} >
@@ -152,7 +154,7 @@ function App() {
             </div>
             {tResult.imageURL.map((url, index) => (
               <div key={index} css={css(tImageViewCSS, tBorderLineCSS)} >
-              <img src={url} alt={`Result ${index}`} />
+                <img src={url} alt={`Result ${index}`} />
               </div>
             ))}
             {tResult.histogramProp &&
