@@ -1,7 +1,7 @@
 import { ImageProcessUtility, ImageProcessUtilityProps, newImageData, ProcessedImage } from "./utility"
 import { ArrayMath as AM } from "./utility"
 
-export function Process033({ tImage, setResult }: ImageProcessUtilityProps) {
+export function Process034({ tImage, setResult }: ImageProcessUtilityProps) {
     const process = ImageProcessUtility({ tImage, setResult }, (aImage: ProcessedImage) => {
         const tWidth_ = aImage.width
         const tHeight_ = aImage.height
@@ -40,14 +40,14 @@ export function Process033({ tImage, setResult }: ImageProcessUtilityProps) {
         }
         console.log("フーリエ変換 終了")
 
-        // ローパスフィルタ
+        // ハイパスフィルタ
         const tFourierLowPass: number[][][] = []
         for (let l = 0; l < tHeight_; l++) {
             tFourierLowPass.push([])
             for (let k = 0; k < tWidth_; k++) {
                 const tR = Math.sqrt((k - tWidth_ / 2) ** 2 + (l - tHeight_ / 2) ** 2)
-                const tLength = Math.sqrt(tHeight_ ** 2 + tWidth_ ** 2) / 2 * 0.5
-                const tFilter = tR < tLength ? 0 : 1
+                const tLength = Math.sqrt(tHeight_ ** 2 + tWidth_ ** 2) / 2 * 0.9
+                const tFilter = tR < tLength ? 1 : 0
                 tFourierLowPass[l][k] = AM.mul(tFourier[l][k], tFilter)
             }
         }
@@ -77,6 +77,6 @@ export function Process033({ tImage, setResult }: ImageProcessUtilityProps) {
     })
 
     return (
-        <button onClick={process}>フーリエ変換　ローパスフィルタ</button>
+        <button onClick={process}>フーリエ変換　ハイパスフィルタ</button>
     )
 }
