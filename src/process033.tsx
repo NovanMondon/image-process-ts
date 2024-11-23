@@ -2,6 +2,26 @@ import { ImageProcessUtility, ImageProcessUtilityProps, newImageData, ProcessedI
 import { ArrayMath as AM } from "./utility"
 
 export function Process033({ tImage, setResult }: ImageProcessUtilityProps) {
+    const swapRegion = (aSource: number[][][], aWidth: number, aHeight: number) => {
+        const tDestination: number[][][] = []
+        // 領域の入れ替え
+        for (let l = 0; l < aHeight; l++) {
+            tDestination.push([])
+            for (let k = 0; k < aWidth; k++) {
+                if(l < aHeight/2 && k < aWidth/2){
+                    tDestination[l][k] = aSource[l + aHeight/2][k + aWidth/2]
+                } else if(l < aHeight/2 && k >= aWidth/2){
+                    tDestination[l][k] = aSource[l + aHeight/2][k - aWidth/2]
+                }else if(l >= aHeight/2 && k < aWidth/2){
+                    tDestination[l][k] = aSource[l - aHeight/2][k + aWidth/2]
+                } else {
+                    tDestination[l][k] = aSource[l - aHeight/2][k - aWidth/2]
+                }
+            }
+        }
+        return tDestination
+    }
+
     const process = ImageProcessUtility({ tImage, setResult }, (aImage: ProcessedImage) => {
         const tWidth_ = aImage.width
         const tHeight_ = aImage.height
@@ -41,16 +61,21 @@ export function Process033({ tImage, setResult }: ImageProcessUtilityProps) {
         console.log("フーリエ変換 終了")
 
         // ローパスフィルタ
-        const tFourierLowPass: number[][][] = []
+        const tFourier0: number[][][] = swapRegion(tFourier, tWidth_, tHeight_)
+        const tFourier1: number[][][] = []
         for (let l = 0; l < tHeight_; l++) {
-            tFourierLowPass.push([])
+            tFourier1.push([])
             for (let k = 0; k < tWidth_; k++) {
                 const tR = Math.sqrt((k - tWidth_ / 2) ** 2 + (l - tHeight_ / 2) ** 2)
                 const tLength = Math.sqrt(tHeight_ ** 2 + tWidth_ ** 2) / 2 * 0.5
-                const tFilter = tR < tLength ? 0 : 1
-                tFourierLowPass[l][k] = AM.mul(tFourier[l][k], tFilter)
+                if (tR < tLength) {
+                    tFourier1[l][k] = tFourier0[l][k]
+                } else {
+                    tFourier1[l][k] = [0, 0]
+                }
             }
         }
+        const tFourier2: number[][][] = swapRegion(tFourier1, tWidth_, tHeight_)
 
         console.log("逆フーリエ変換 開始")
         // 逆フーリエ変換
@@ -61,7 +86,7 @@ export function Process033({ tImage, setResult }: ImageProcessUtilityProps) {
                 let tT0 = [0, 0]
                 for (let l = 0; l < tHeight_; l++) {
                     for (let k = 0; k < tWidth_; k++) {
-                        const tG = tFourierLowPass[l][k]
+                        const tG = tFourier2[l][k]
                         const tTheta = 2 * Math.PI * (k * x / tWidth_ + l * y / tHeight_)
                         tT0 = AM.add(tT0, AM.compMul(tG, [Math.cos(tTheta), Math.sin(tTheta)]))
                     }
