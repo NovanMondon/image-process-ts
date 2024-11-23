@@ -19,7 +19,7 @@ export function Process011({ tImage, setResult }: ImageProcessUtilityProps) {
                             // 画像の外側の場合はパディングを使う
                             tSum = AM.add(tSum, tPadding)
                         } else {
-                            const tRGB = aImage.data[tSourceX][tSourceY]
+                            const tRGB = aImage.data[tSourceY][tSourceX]
                             tSum = AM.add(tSum, tRGB)
                         }
                     }
@@ -27,7 +27,7 @@ export function Process011({ tImage, setResult }: ImageProcessUtilityProps) {
 
                 const tAverage = AM.div(tSum, tKernelSize * tKernelSize)
 
-                tResultData[x][y] = tAverage
+                tResultData[y][x] = tAverage
             }
         }
 

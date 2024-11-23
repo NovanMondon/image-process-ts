@@ -21,7 +21,7 @@ export function Process013({ tImage, setResult }: ImageProcessUtilityProps) {
                             tMax = Math.max(tMax, tGray)
                             tMin = Math.min(tMin, tGray)
                         } else {
-                            const tRGB = aImage.data[tSourceX][tSourceY]
+                            const tRGB = aImage.data[tSourceY][tSourceX]
                             const tGray = tRGB[0] * 0.2126 + tRGB[1] * 0.7152 + tRGB[2] * 0.0722
                             tMax = Math.max(tMax, tGray)
                             tMin = Math.min(tMin, tGray)
@@ -29,7 +29,7 @@ export function Process013({ tImage, setResult }: ImageProcessUtilityProps) {
                     }
                 }
                 const tMaxMinusMin = tMax - tMin
-                tResultData[x][y] = [tMaxMinusMin, tMaxMinusMin, tMaxMinusMin]
+                tResultData[y][x] = [tMaxMinusMin, tMaxMinusMin, tMaxMinusMin]
             }
         }
 

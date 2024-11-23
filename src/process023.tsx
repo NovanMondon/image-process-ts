@@ -13,7 +13,7 @@ export function Process023({ tImage, setResult }: ImageProcessUtilityProps) {
         const tOldHistogramData = Array(256).fill(0)
         for (let x = 0; x < tProcessedImage.width; x++) {
             for (let y = 0; y < tProcessedImage.height; y++) {
-                const tRGB = tProcessedImage.data[x][y]
+                const tRGB = tProcessedImage.data[y][x]
                 tRGB.forEach((aValue) => {
                     tOldHistogramData[aValue]++
                 })
@@ -31,18 +31,18 @@ export function Process023({ tImage, setResult }: ImageProcessUtilityProps) {
         const tResultData = newImageData(tProcessedImage.width, tProcessedImage.height)
         for (let x = 0; x < tProcessedImage.width; x++) {
             for (let y = 0; y < tProcessedImage.height; y++) {
-                const tRGB = tProcessedImage.data[x][y]
+                const tRGB = tProcessedImage.data[y][x]
                 const tRGB_ = tRGB.map((aValue) => {
                     return Math.round(tValueRelation[aValue])
                 })
-                tResultData[x][y] = tRGB_
+                tResultData[y][x] = tRGB_
             }
         }
 
         const tHistogramData = Array(256).fill(0)
         for (let x = 0; x < tProcessedImage.width; x++) {
             for (let y = 0; y < tProcessedImage.height; y++) {
-                const tRGB = tResultData[x][y]
+                const tRGB = tResultData[y][x]
                 tRGB.forEach((aValue) => {
                     tHistogramData[aValue]++
                 })

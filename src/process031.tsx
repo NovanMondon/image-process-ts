@@ -16,7 +16,7 @@ export function Process031({ tImage, setResult }: ImageProcessUtilityProps) {
 
         const tImage0_: ProcessedImage = (() => {
             const tDx = 30
-            let tA = tDx / tHeight_
+            let tA = tDx / tWidth_
             const tImage_ = {
                 width: tWidth_ + tDx,
                 height: tHeight_,
@@ -30,10 +30,10 @@ export function Process031({ tImage, setResult }: ImageProcessUtilityProps) {
                     const [tSourceX, tSourceY] = affineInverse(a, b, c, d, 0, 0, x, y).map(Math.floor)
 
                     if (tSourceX < 0 || tSourceX >= aImage.width || tSourceY < 0 || tSourceY >= aImage.height) {
-                        tImage_.data[x][y] = tPadding
+                        tImage_.data[y][x] = tPadding
                         continue
                     }
-                    tImage_.data[x][y] = aImage.data[tSourceX][tSourceY]
+                    tImage_.data[y][x] = aImage.data[tSourceY][tSourceX]
                 }
             }
             return tImage_
@@ -41,7 +41,7 @@ export function Process031({ tImage, setResult }: ImageProcessUtilityProps) {
 
         const tImage1_: ProcessedImage = (() => {
             const tDy = 30
-            let tA = tDy / tWidth_
+            let tA = tDy / tHeight_
             const tImage_ = {
                 width: tWidth_,
                 height: tHeight_ + tDy,
@@ -55,10 +55,10 @@ export function Process031({ tImage, setResult }: ImageProcessUtilityProps) {
                     const [tSourceX, tSourceY] = affineInverse(a, b, c, d, 0, 0, x, y).map(Math.floor)
 
                     if (tSourceX < 0 || tSourceX >= aImage.width || tSourceY < 0 || tSourceY >= aImage.height) {
-                        tImage_.data[x][y] = tPadding
+                        tImage_.data[y][x] = tPadding
                         continue
                     }
-                    tImage_.data[x][y] = aImage.data[tSourceX][tSourceY]
+                    tImage_.data[y][x] = aImage.data[tSourceY][tSourceX]
                 }
             }
             return tImage_
@@ -73,17 +73,17 @@ export function Process031({ tImage, setResult }: ImageProcessUtilityProps) {
                 height: tHeight_ + tDy,
                 data: newImageData(tWidth_ + tDx, tHeight_ + tDy),
             }
-            const [a, b, c, d] = [1, tDy / tWidth_, tDx / tHeight_, 1]
+            const [a, b, c, d] = [1, tDy / tHeight_, tDx / tWidth_, 1]
 
             for (let x = 0; x < tImage_.width; x++) {
                 for (let y = 0; y < tImage_.height; y++) {
                     const [tSourceX, tSourceY] = affineInverse(a, b, c, d, 0, 0, x, y).map(Math.floor)
 
                     if (tSourceX < 0 || tSourceX >= aImage.width || tSourceY < 0 || tSourceY >= aImage.height) {
-                        tImage_.data[x][y] = tPadding
+                        tImage_.data[y][x] = tPadding
                         continue
                     }
-                    tImage_.data[x][y] = aImage.data[tSourceX][tSourceY]
+                    tImage_.data[y][x] = aImage.data[tSourceY][tSourceX]
                 }
             }
             return tImage_

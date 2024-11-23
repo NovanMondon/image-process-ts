@@ -8,14 +8,14 @@ export function Process033({ tImage, setResult }: ImageProcessUtilityProps) {
         for (let l = 0; l < aHeight; l++) {
             tDestination.push([])
             for (let k = 0; k < aWidth; k++) {
-                if(l < aHeight/2 && k < aWidth/2){
-                    tDestination[l][k] = aSource[l + aHeight/2][k + aWidth/2]
-                } else if(l < aHeight/2 && k >= aWidth/2){
-                    tDestination[l][k] = aSource[l + aHeight/2][k - aWidth/2]
-                }else if(l >= aHeight/2 && k < aWidth/2){
-                    tDestination[l][k] = aSource[l - aHeight/2][k + aWidth/2]
+                if (l < aHeight / 2 && k < aWidth / 2) {
+                    tDestination[l][k] = aSource[l + aHeight / 2][k + aWidth / 2]
+                } else if (l < aHeight / 2 && k >= aWidth / 2) {
+                    tDestination[l][k] = aSource[l + aHeight / 2][k - aWidth / 2]
+                } else if (l >= aHeight / 2 && k < aWidth / 2) {
+                    tDestination[l][k] = aSource[l - aHeight / 2][k + aWidth / 2]
                 } else {
-                    tDestination[l][k] = aSource[l - aHeight/2][k - aWidth/2]
+                    tDestination[l][k] = aSource[l - aHeight / 2][k - aWidth / 2]
                 }
             }
         }
@@ -27,9 +27,9 @@ export function Process033({ tImage, setResult }: ImageProcessUtilityProps) {
         const tHeight_ = aImage.height
 
         const tGrayImage: number[][][] = []
-        for (let y = 0; y < tWidth_; y++) {
+        for (let y = 0; y < tHeight_; y++) {
             tGrayImage[y] = []
-            for (let x = 0; x < tHeight_; x++) {
+            for (let x = 0; x < tWidth_; x++) {
                 const tRGB = aImage.data[y][x]
                 const tGray = tRGB[0] * 0.2126 + tRGB[1] * 0.7152 + tRGB[2] * 0.0722
                 tGrayImage[y][x] = [tGray, tGray, tGray]

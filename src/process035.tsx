@@ -27,9 +27,9 @@ export function Process035({ tImage, setResult }: ImageProcessUtilityProps) {
         const tHeight_ = aImage.height
 
         const tGrayImage: number[][][] = []
-        for (let y = 0; y < tWidth_; y++) {
+        for (let y = 0; y < tHeight_; y++) {
             tGrayImage[y] = []
-            for (let x = 0; x < tHeight_; x++) {
+            for (let x = 0; x < tWidth_; x++) {
                 const tRGB = aImage.data[y][x]
                 const tGray = tRGB[0] * 0.2126 + tRGB[1] * 0.7152 + tRGB[2] * 0.0722
                 tGrayImage[y][x] = [tGray, tGray, tGray]

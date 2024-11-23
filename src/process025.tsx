@@ -10,7 +10,7 @@ export function Process025({ tImage, setResult }: ImageProcessUtilityProps) {
             for(let y = 0; y < tHeight_; y++) {
                 const tSourceX = Math.round(x / tScale)
                 const tSourceY = Math.round(y / tScale)
-                tImageData_[x][y] = aImage.data[tSourceX][tSourceY]
+                tImageData_[y][x] = aImage.data[tSourceY][tSourceX]
             }
         }
 

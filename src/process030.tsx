@@ -26,10 +26,10 @@ export function Process030({ tImage, setResult }: ImageProcessUtilityProps) {
                 const [tSourceX, tSourceY] = affineInverse(a, b, c, d, 0, 0, x, y).map(Math.floor)
 
                 if (tSourceX < 0 || tSourceX >= aImage.width || tSourceY < 0 || tSourceY >= aImage.height) {
-                    tImage0_.data[x][y] = tPadding
+                    tImage0_.data[y][x] = tPadding
                     continue
                 }
-                tImage0_.data[x][y] = aImage.data[tSourceX][tSourceY]
+                tImage0_.data[y][x] = aImage.data[tSourceY][tSourceX]
             }
         }
 
@@ -47,10 +47,10 @@ export function Process030({ tImage, setResult }: ImageProcessUtilityProps) {
                 const [tSourceX, tSourceY] = affineInverse(a, b, c, d, -tCenterDiffX, -tCenterDiffY, x, y).map(Math.floor)
 
                 if (tSourceX < 0 || tSourceX >= aImage.width || tSourceY < 0 || tSourceY >= aImage.height) {
-                    tImage1_.data[x][y] = tPadding
+                    tImage1_.data[y][x] = tPadding
                     continue
                 }
-                tImage1_.data[x][y] = aImage.data[tSourceX][tSourceY]
+                tImage1_.data[y][x] = aImage.data[tSourceY][tSourceX]
             }
         }
 

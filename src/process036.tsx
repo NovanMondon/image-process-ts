@@ -10,6 +10,7 @@ export function Process036({ tImage, setResult }: ImageProcessUtilityProps) {
         const tDiscreteCosineTransform = newImageData(tWidth_, tHeight_)
         for (let tYs = 0; tYs < tHeight_; tYs += tT) {
             for (let tXs = 0; tXs < tWidth_; tXs += tT) {
+                console.log("離散コサイン変換 " + tYs + "行 " + tXs + "列");
                 for (let v = 0; v < tT; v++) {
                     for (let u = 0; u < tT; u++) {
                         const tCu = (u === 0) ? 1 / Math.sqrt(2) : 1
@@ -32,9 +33,10 @@ export function Process036({ tImage, setResult }: ImageProcessUtilityProps) {
         }
 
         const tImage_ = newImageData(tWidth_, tHeight_)
-        const tK = 3
+        const tK = 8
         for (let tYs = 0; tYs < tHeight_; tYs += tT) {
             for (let tXs = 0; tXs < tWidth_; tXs += tT) {
+                console.log("離散コサイン変換 復元 " + tYs + "行 " + tXs + "列");
                 for (let y = 0; y < tT; y++) {
                     for (let x = 0; x < tT; x++) {
                         let tSum = [0, 0, 0]

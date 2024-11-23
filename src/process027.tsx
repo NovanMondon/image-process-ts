@@ -23,7 +23,7 @@ export function Process027({ tImage, setResult }: ImageProcessUtilityProps) {
                         if (tX < 0 || tX >= aImage.width || tY < 0 || tY >= aImage.height) {
                             continue
                         }
-                        const tRGB = aImage.data[tX][tY]
+                        const tRGB = aImage.data[tY][tX]
                         const tDx = Math.abs(x / tScale - tX)
                         const tDy = Math.abs(y / tScale - tY)
                         const tA = -1
@@ -43,7 +43,7 @@ export function Process027({ tImage, setResult }: ImageProcessUtilityProps) {
                     }
                 }
                 tRGBSum = AM.div(tRGBSum, tHSum)
-                tImageData_[x][y] = tRGBSum
+                tImageData_[y][x] = tRGBSum
             }
         }
 

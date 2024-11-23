@@ -66,11 +66,11 @@ export function CalcImage(aData: Uint8ClampedArray, aWidth: number, aHeight: num
         height: aHeight,
         data: newImageData(aWidth, aHeight),
     }
-    for (let x = 0; x < tImage.width; x++) {
-        tImage.data[x] = []
-        for (let y = 0; y < tImage.height; y++) {
+    for (let y = 0; y < tImage.height; y++) {
+        tImage.data[y] = []
+        for (let x = 0; x < tImage.width; x++) {
             const tIndex = (y * tImage.width + x) * 4
-            tImage.data[x][y] = [aData[tIndex], aData[tIndex + 1], aData[tIndex + 2]]
+            tImage.data[y][x] = [aData[tIndex], aData[tIndex + 1], aData[tIndex + 2]]
         }
     }
     return tImage
@@ -81,9 +81,9 @@ export function CalcResultData(aImage: ProcessedImage): Uint8ClampedArray {
     for (let x = 0; x < aImage.width; x++) {
         for (let y = 0; y < aImage.height; y++) {
             const tIndex = (y * aImage.width + x) * 4
-            tResultData[tIndex] = aImage.data[x][y][0]
-            tResultData[tIndex + 1] = aImage.data[x][y][1]
-            tResultData[tIndex + 2] = aImage.data[x][y][2]
+            tResultData[tIndex] = aImage.data[y][x][0]
+            tResultData[tIndex + 1] = aImage.data[y][x][1]
+            tResultData[tIndex + 2] = aImage.data[y][x][2]
             tResultData[tIndex + 3] = 255
         }
     }
@@ -141,10 +141,10 @@ export const ArrayMath = {
     // others
     new: (aWidth: number, aHeight: number, aInit: number) => {
         const tArray: number[][] = []
-        for (let x = 0; x < aWidth; x++) {
-            tArray[x] = []
-            for (let y = 0; y < aHeight; y++) {
-                tArray[x][y] = aInit
+        for (let y = 0; y < aHeight; y++) {
+            tArray[y] = []
+            for (let x = 0; x < aWidth; x++) {
+                tArray[y][x] = aInit
             }
         }
         return tArray
@@ -153,10 +153,10 @@ export const ArrayMath = {
 
 export function newImageData(aWidth: number, aHeight: number): number[][][] {
     const tData: number[][][] = []
-    for (let x = 0; x < aWidth; x++) {
-        tData[x] = []
-        for (let y = 0; y < aHeight; y++) {
-            tData[x][y] = [0, 0, 0]
+    for (let y = 0; y < aHeight; y++) {
+        tData.push([])
+        for (let x = 0; x < aWidth; x++) {
+            tData[y][x] = [0, 0, 0]
         }
     }
     return tData
