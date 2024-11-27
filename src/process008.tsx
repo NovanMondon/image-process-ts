@@ -9,14 +9,14 @@ export function Process008({ tImage, setResult }: ImageProcessUtilityProps) {
                 let tMax = [0, 0, 0]
                 for (let x = 0; x < tGridSize; x++) {
                     for (let y = 0; y < tGridSize; y++) {
-                        const tRGB = aImage.data[tGridX * tGridSize + x][tGridY * tGridSize + y]
+                        const tRGB = aImage.data[tGridY * tGridSize + y][tGridX * tGridSize + x]
                         tMax = AM.max(tMax, tRGB)
                     }
                 }
 
                 for (let x = 0; x < tGridSize; x++) {
                     for (let y = 0; y < tGridSize; y++) {
-                        aImage.data[tGridX * tGridSize + x][tGridY * tGridSize + y] = tMax
+                        aImage.data[tGridY * tGridSize + y][tGridX * tGridSize + x] = tMax
                     }
                 }
             }

@@ -18,15 +18,15 @@ export function Process019({ tImage, setResult }: ImageProcessUtilityProps) {
                             if (tSourceX < 0 || tSourceX >= aImage.width || tSourceY < 0 || tSourceY >= aImage.height) {
                                 // 画像の外側の場合はパディングを使う
                                 const tGray = tPadding[0] * 0.2126 + tPadding[1] * 0.7152 + tPadding[2] * 0.0722
-                                tFiltered += tGray * aKernel[tKernelX][tKernelY]
+                                tFiltered += tGray * aKernel[tKernelY][tKernelX]
                             } else {
-                                const tRGB = aImage.data[tSourceX][tSourceY]
+                                const tRGB = aImage.data[tSourceY][tSourceX]
                                 const tGray = tRGB[0] * 0.2126 + tRGB[1] * 0.7152 + tRGB[2] * 0.0722
-                                tFiltered += tGray * aKernel[tKernelX][tKernelY]
+                                tFiltered += tGray * aKernel[tKernelY][tKernelX]
                             }
                         }
                     }
-                    tResultData[x][y] = [tFiltered, tFiltered, tFiltered]
+                    tResultData[y][x] = [tFiltered, tFiltered, tFiltered]
                 }
             }
             return tResultData
@@ -39,8 +39,8 @@ export function Process019({ tImage, setResult }: ImageProcessUtilityProps) {
             for (let y = 0; y < tKernelSize; y++) {
                 const tKernelX = x + tKernelOffset
                 const tKernelY = y + tKernelOffset
-                tKernel[x][y] = (tKernelX**2 + tKernelY**2 - tSigma**2) / (2 * Math.PI * tSigma**6) * Math.exp(-(tKernelX**2 + tKernelY**2) / (2 * tSigma**2))
-                tSum += tKernel[x][y]
+                tKernel[y][x] = (tKernelX**2 + tKernelY**2 - tSigma**2) / (2 * Math.PI * tSigma**6) * Math.exp(-(tKernelX**2 + tKernelY**2) / (2 * tSigma**2))
+                tSum += tKernel[y][x]
             }
         }
         tKernel = AM.div2D(tKernel, tSum)

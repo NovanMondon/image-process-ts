@@ -19,14 +19,14 @@ export function Process010({ tImage, setResult }: ImageProcessUtilityProps) {
                             // 画像の外側の場合はパディングを使う
                             tRGBs.map((tRGB_, i) => tRGB_.push(tPadding[i]))
                         } else {
-                            const tRGB = aImage.data[tSourceX][tSourceY]
+                            const tRGB = aImage.data[tSourceY][tSourceX]
                             tRGBs.map((tRGB_, i) => tRGB_.push(tRGB[i]))
                         }
                     }
                 }
                 const tMedian = tRGBs.map(tRGB => AM.sMedian(tRGB))
 
-                tResultData[x][y] = tMedian
+                tResultData[y][x] = tMedian
             }
         }
 

@@ -13,10 +13,10 @@ export function Process026({ tImage, setResult }: ImageProcessUtilityProps) {
                 const tSourceY = Math.floor(y / tScale)
                 const tDx = x / tScale - tSourceX
                 const tDy = y / tScale - tSourceY
-                const tX0Y0 = aImage.data[tSourceX][tSourceY]
-                const tX1Y0 = tSourceX + 1 < aImage.width ? aImage.data[tSourceX + 1][tSourceY] : tX0Y0
-                const tX0Y1 = tSourceY + 1 < aImage.height ? aImage.data[tSourceX][tSourceY + 1] : tX0Y0
-                const tX1Y1 = tSourceX + 1 < aImage.width && tSourceY + 1 < aImage.height ? aImage.data[tSourceX + 1][tSourceY + 1] : tX0Y0
+                const tX0Y0 = aImage.data[tSourceY][tSourceX]
+                const tX1Y0 = tSourceX + 1 < aImage.width ? aImage.data[tSourceY][tSourceX + 1] : tX0Y0
+                const tX0Y1 = tSourceY + 1 < aImage.height ? aImage.data[tSourceY + 1][tSourceX] : tX0Y0
+                const tX1Y1 = tSourceX + 1 < aImage.width && tSourceY + 1 < aImage.height ? aImage.data[tSourceY + 1][tSourceX + 1] : tX0Y0
 
                 const tRGB_ = AM.addAll(
                     AM.mul(tX0Y0, (1 - tDx) * (1 - tDy)),
@@ -24,7 +24,7 @@ export function Process026({ tImage, setResult }: ImageProcessUtilityProps) {
                     AM.mul(tX0Y1, (1 - tDx) * tDy),
                     AM.mul(tX1Y1, tDx * tDy)
                 )
-                tImageData_[x][y] = tRGB_
+                tImageData_[y][x] = tRGB_
             }
         }
 

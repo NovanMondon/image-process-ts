@@ -13,7 +13,7 @@ export function Process020({ tImage, setResult }: ImageProcessUtilityProps) {
         const tHistogramData = Array(256).fill(0)
         for (let x = 0; x < tProcessedImage.width; x++) {
             for (let y = 0; y < tProcessedImage.height; y++) {
-                const tRGB = tProcessedImage.data[x][y]
+                const tRGB = tProcessedImage.data[y][x]
                 tRGB.forEach((aValue) => {
                     tHistogramData[aValue]++
                 })

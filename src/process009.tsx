@@ -22,14 +22,14 @@ export function Process009({ tImage, setResult }: ImageProcessUtilityProps) {
                         const tSourceY = y + tKernelY + tKernelOffset
                         if (tSourceX < 0 || tSourceX >= aImage.width || tSourceY < 0 || tSourceY >= aImage.height) {
                             // 画像の外側の場合はパディングを使う
-                            tFiltered = AM.add(tFiltered, AM.mul(tPadding, tKernel[tKernelX][tKernelY]))
+                            tFiltered = AM.add(tFiltered, AM.mul(tPadding, tKernel[tKernelY][tKernelX]))
                         } else {
-                            const tRGB = aImage.data[tSourceX][tSourceY]
-                            tFiltered = AM.add(tFiltered, AM.mul(tRGB, tKernel[tKernelX][tKernelY]))
+                            const tRGB = aImage.data[tSourceY][tSourceX]
+                            tFiltered = AM.add(tFiltered, AM.mul(tRGB, tKernel[tKernelY][tKernelX]))
                         }
                     }
                 }
-                tResultData[x][y] = tFiltered
+                tResultData[y][x] = tFiltered
             }
         }
 

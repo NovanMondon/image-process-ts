@@ -10,7 +10,7 @@ export function Process007({ tImage, setResult }: ImageProcessUtilityProps) {
                 let tSum = [0, 0, 0]
                 for (let x = 0; x < tGridSize; x++) {
                     for (let y = 0; y < tGridSize; y++) {
-                        const tRGB = aImage.data[tGridX * tGridSize + x][tGridY * tGridSize + y]
+                        const tRGB = aImage.data[tGridY * tGridSize + y][tGridX * tGridSize + x]
                         tSum = AM.add(tSum, tRGB)
                     }
                 }
@@ -19,7 +19,7 @@ export function Process007({ tImage, setResult }: ImageProcessUtilityProps) {
                 // グリッド内のRGBを平均で置き換える
                 for (let x = 0; x < tGridSize; x++) {
                     for (let y = 0; y < tGridSize; y++) {
-                        aImage.data[tGridX * tGridSize + x][tGridY * tGridSize + y] = tMean
+                        aImage.data[tGridY * tGridSize + y][tGridX * tGridSize + x] = tMean
                     }
                 }
             }

@@ -5,9 +5,9 @@ export function Process002({ tImage, setResult }: ImageProcessUtilityProps) {
     const grayscale = ImageProcessUtility({ tImage, setResult }, (aImage: ProcessedImage) => {
         for (let x = 0; x < aImage.width; x++) {
             for (let y = 0; y < aImage.height; y++) {
-                const tRGB = aImage.data[x][y]
+                const tRGB = aImage.data[y][x]
                 const tGray = tRGB[0] * 0.2126 + tRGB[1] * 0.7152 + tRGB[2] * 0.0722
-                aImage.data[x][y] = [tGray, tGray, tGray]
+                aImage.data[y][x] = [tGray, tGray, tGray]
             }
         }
 

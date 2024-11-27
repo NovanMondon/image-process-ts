@@ -19,11 +19,11 @@ export function Process028({ tImage, setResult }: ImageProcessUtilityProps) {
                 const [tSourceX, tSourceY] = affineInverse(1, 0, 0, 1, tTx, tTy, x, y)
 
                 if (tSourceX < 0 || tSourceX >= aImage.width || tSourceY < 0 || tSourceY >= aImage.height) {
-                    tImage_.data[x][y] = tPadding
+                    tImage_.data[y][x] = tPadding
                     continue
                 }
 
-                tImage_.data[x][y] = aImage.data[tSourceX][tSourceY]
+                tImage_.data[y][x] = aImage.data[tSourceY][tSourceX]
             }
         }
 

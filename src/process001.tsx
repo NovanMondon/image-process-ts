@@ -3,11 +3,11 @@ import { ImageProcessUtility, ImageProcessUtilityProps, ProcessedImage } from ".
 export function Process001({ tImage, setResult }: ImageProcessUtilityProps) {
     // RGBをBGRに変換
     const rgb2bgr = ImageProcessUtility({ tImage, setResult }, (aImage: ProcessedImage) => {
-        for (let x = 0; x < aImage.width; x++) {
-            for (let y = 0; y < aImage.height; y++) {
-                const tRGB = aImage.data[x][y]
+        for (let y = 0; y < aImage.height; y++) {
+            for (let x = 0; x < aImage.width; x++) {
+                const tRGB = aImage.data[y][x]
                 const tBGR = [tRGB[2], tRGB[1], tRGB[0]]
-                aImage.data[x][y] = tBGR
+                aImage.data[y][x] = tBGR
             }
         }
 

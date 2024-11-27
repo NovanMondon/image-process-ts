@@ -6,13 +6,13 @@ export function Process024({ tImage, setResult }: ImageProcessUtilityProps) {
         const tGamma = 2.2
         for (let x = 0; x < aImage.width; x++) {
             for (let y = 0; y < aImage.height; y++) {
-                const tRGB = aImage.data[x][y]
+                const tRGB = aImage.data[y][x]
                 const tRGB_ = tRGB.map((aValue) => {
                     const tValue01 = aValue / 255
                     const tValue01_ = Math.pow(1 / tC * tValue01, 1 / tGamma)
                     return Math.round(tValue01_ * 255)
                 })
-                aImage.data[x][y] = tRGB_
+                aImage.data[y][x] = tRGB_
             }
         }
 

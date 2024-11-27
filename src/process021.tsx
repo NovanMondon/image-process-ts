@@ -14,7 +14,7 @@ export function Process021({ tImage, setResult }: ImageProcessUtilityProps) {
         let tMax = 0
         for (let x = 0; x < tProcessedImage.width; x++) {
             for (let y = 0; y < tProcessedImage.height; y++) {
-                const tRGB = tProcessedImage.data[x][y]
+                const tRGB = tProcessedImage.data[y][x]
                 tMin = Math.min(tMin, tRGB[0], tRGB[1], tRGB[2])
                 tMax = Math.max(tMax, tRGB[0], tRGB[1], tRGB[2])
             }
@@ -26,7 +26,7 @@ export function Process021({ tImage, setResult }: ImageProcessUtilityProps) {
         const tResultData = newImageData(tProcessedImage.width, tProcessedImage.height)
         for (let x = 0; x < tProcessedImage.width; x++) {
             for (let y = 0; y < tProcessedImage.height; y++) {
-                const tRGB = tProcessedImage.data[x][y]
+                const tRGB = tProcessedImage.data[y][x]
                 const tRGB_ = tRGB.map((aValue) => {
                     if (aValue < tMin) {
                         return tLower
@@ -36,14 +36,14 @@ export function Process021({ tImage, setResult }: ImageProcessUtilityProps) {
                         return Math.round(tCoefficient * (aValue - tMin) + tLower)
                     }
                 })
-                tResultData[x][y] = tRGB_
+                tResultData[y][x] = tRGB_
             }
         }
 
         const tHistogramData = Array(256).fill(0)
         for (let x = 0; x < tProcessedImage.width; x++) {
             for (let y = 0; y < tProcessedImage.height; y++) {
-                const tRGB = tResultData[x][y]
+                const tRGB = tResultData[y][x]
                 tRGB.forEach((aValue) => {
                     tHistogramData[aValue]++
                 })

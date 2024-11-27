@@ -7,7 +7,7 @@ export function Process004({ tImage, setResult }: ImageProcessUtilityProps) {
         const tHist = new Array(256).fill(0)
         for (let x = 0; x < aImage.width; x++) {
             for (let y = 0; y < aImage.height; y++) {
-                const tRGB = aImage.data[x][y]
+                const tRGB = aImage.data[y][x]
                 const tGray = tRGB[0] * 0.2126 + tRGB[1] * 0.7152 + tRGB[2] * 0.0722
 
                 tHist[Math.floor(tGray)]++
@@ -43,10 +43,10 @@ export function Process004({ tImage, setResult }: ImageProcessUtilityProps) {
         // 二値化
         for (let x = 0; x < aImage.width; x++) {
             for (let y = 0; y < aImage.height; y++) {
-                const tRGB = aImage.data[x][y]
+                const tRGB = aImage.data[y][x]
                 const tGray = tRGB[0] * 0.2126 + tRGB[1] * 0.7152 + tRGB[2] * 0.0722
                 const tBinary = tGray > tThreshold ? 255 : 0
-                aImage.data[x][y] = [tBinary, tBinary, tBinary]
+                aImage.data[y][x] = [tBinary, tBinary, tBinary]
             }
         }
 

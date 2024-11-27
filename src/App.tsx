@@ -32,6 +32,16 @@ import { Process027 } from './process027'
 import { Process028 } from './process028'
 import { Process029 } from './process029'
 import { Process030 } from './process030'
+import { Process031 } from './process031'
+import { Process032 } from './process032'
+import { Process033 } from './process033'
+import { Process034 } from './process034'
+import { Process035 } from './process035'
+import { Process036 } from './process036'
+import { Process037 } from './process037'
+import { Process038 } from './process038'
+import { Process039 } from './process039'
+import { Process040 } from './process040'
 
 export class ResultState {
   imageURL: string[]
@@ -106,7 +116,7 @@ function App() {
     <div>
       <h1>Image Process TS</h1>
       <div css={css(tHorizontalCSS)} >
-        <aside css={css(tBorderLineCSS, tVerticalCSS, { padding: 8, width: 160, flexShrink:0, height: 720, overflow: "auto" })} >
+        <aside css={css(tBorderLineCSS, tVerticalCSS, { padding: 8, width: 160, flexShrink: 0, height: 720, overflow: "auto" })} >
           <Process001 tImage={tImage} setResult={setResult} />
           <Process002 tImage={tImage} setResult={setResult} />
           <Process003 tImage={tImage} setResult={setResult} />
@@ -137,6 +147,16 @@ function App() {
           <Process028 tImage={tImage} setResult={setResult} />
           <Process029 tImage={tImage} setResult={setResult} />
           <Process030 tImage={tImage} setResult={setResult} />
+          <Process031 tImage={tImage} setResult={setResult} />
+          <Process032 tImage={tImage} setResult={setResult} />
+          <Process033 tImage={tImage} setResult={setResult} />
+          <Process034 tImage={tImage} setResult={setResult} />
+          <Process035 tImage={tImage} setResult={setResult} />
+          <Process036 tImage={tImage} setResult={setResult} />
+          <Process037 tImage={tImage} setResult={setResult} />
+          <Process038 tImage={tImage} setResult={setResult} />
+          <Process039 tImage={tImage} setResult={setResult} />
+          <Process040 tImage={tImage} setResult={setResult} />
         </aside>
 
         <main css={css(tVerticalCSS)} >
@@ -148,16 +168,11 @@ function App() {
             >
               {tImage && <img src={tImage.src} alt="Original" />}
             </div>
-            {tResult.imageURL[0] &&
-              <div css={css(tImageViewCSS, tBorderLineCSS)} >
-                {<img src={tResult.imageURL[0]} alt="Result" />}
+            {tResult.imageURL.map((url, index) => (
+              <div key={index} css={css(tImageViewCSS, tBorderLineCSS)} >
+                <img src={url} alt={`Result ${index}`} />
               </div>
-            }
-            {tResult.imageURL[1] &&
-              <div css={css(tImageViewCSS, tBorderLineCSS)} >
-                {<img src={tResult.imageURL[1]} alt="Result" />}
-              </div>
-            }
+            ))}
             {tResult.histogramProp &&
               <div css={css(tGraphViewCSS, tBorderLineCSS)} >
                 <Histogram prop={tResult.histogramProp} />

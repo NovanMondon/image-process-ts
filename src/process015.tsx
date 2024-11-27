@@ -18,29 +18,29 @@ export function Process015({ tImage, setResult }: ImageProcessUtilityProps) {
                             if (tSourceX < 0 || tSourceX >= aImage.width || tSourceY < 0 || tSourceY >= aImage.height) {
                                 // 画像の外側の場合はパディングを使う
                                 const tGray = tPadding[0] * 0.2126 + tPadding[1] * 0.7152 + tPadding[2] * 0.0722
-                                tFiltered += tGray * aKernel[tKernelX][tKernelY]
+                                tFiltered += tGray * aKernel[tKernelY][tKernelX]
                             } else {
-                                const tRGB = aImage.data[tSourceX][tSourceY]
+                                const tRGB = aImage.data[tSourceY][tSourceX]
                                 const tGray = tRGB[0] * 0.2126 + tRGB[1] * 0.7152 + tRGB[2] * 0.0722
-                                tFiltered += tGray * aKernel[tKernelX][tKernelY]
+                                tFiltered += tGray * aKernel[tKernelY][tKernelX]
                             }
                         }
                     }
-                    tResultData[x][y] = [tFiltered, tFiltered, tFiltered]
+                    tResultData[y][x] = [tFiltered, tFiltered, tFiltered]
                 }
             }
             return tResultData
         }
 
-        const tResultData0 = filter(aImage, AM.div2D([ // 縦方向 ※x軸を先に走査するので、行列のx軸とy軸が逆転している
-            [1, 0, -1],
-            [2, 0, -2],
-            [1, 0, -1]
-        ], 1))
-        const tResultData1 = filter(aImage, AM.div2D([ // 横方向
+        const tResultData0 = filter(aImage, AM.div2D([ // 縦方向
             [1, 2, 1],
             [0, 0, 0],
             [-1, -2, -1]
+        ], 1))
+        const tResultData1 = filter(aImage, AM.div2D([ // 横方向
+            [1, 0, -1],
+            [2, 0, -2],
+            [1, 0, -1]
         ], 1))
         const aImage0 = { width: aImage.width, height: aImage.height, data: tResultData0 }
         const aImage1 = { width: aImage.width, height: aImage.height, data: tResultData1 }

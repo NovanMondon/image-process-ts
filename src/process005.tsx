@@ -36,11 +36,11 @@ export function Process005({ tImage, setResult }: ImageProcessUtilityProps) {
     const hsv_invH = ImageProcessUtility({ tImage, setResult }, (aImage: ProcessedImage) => {
         for (let x = 0; x < aImage.width; x++) {
             for (let y = 0; y < aImage.height; y++) {
-                const tRGB = aImage.data[x][y]
+                const tRGB = aImage.data[y][x]
                 const tHSV = rgb2hsv(tRGB)
                 tHSV[0] = (tHSV[0] + 180) % 360
                 const tRGB_ = hsv2rgb(tHSV)
-                aImage.data[x][y] = tRGB_
+                aImage.data[y][x] = tRGB_
             }
         }
 
